@@ -26,9 +26,9 @@ func (s *Server) ProcessIntent(req *vtt.IntentRequest) (*vtt.IntentResponse, err
 	var finished4 string
 	var finished5 string
 	var transcribedText string
-	f, err := os.Create("/tmp/test.ogg")
+	f, err := os.Create("/tmp/voice.ogg")
 	check(err)
-	cmd1 := exec.Command("/bin/bash", "../test.sh")
+	cmd1 := exec.Command("/bin/bash", "../stt.sh")
 	data := []byte{}
 	data = append(data, req.FirstReq.InputAudio...)
 	cmd1.Run()
@@ -54,20 +54,20 @@ func (s *Server) ProcessIntent(req *vtt.IntentRequest) (*vtt.IntentResponse, err
 		}
 		data = append(data, chunk.InputAudio...)
                 f.Write(chunk.InputAudio)
-		fileBytes1, err := ioutil.ReadFile("../testutterance1")
+		fileBytes1, err := ioutil.ReadFile("../utterance1")
 		if err != nil {
 			//nothing
 		}
 		transcribedText1 := strings.TrimSpace(string(fileBytes1))
-		    if _, err := os.Stat("../testutterance1"); err == nil {
+		    if _, err := os.Stat("../utterance1"); err == nil {
 			finished1 = transcribedText1
 		    }
-                fileBytes2, err := ioutil.ReadFile("../testutterance2")
+                fileBytes2, err := ioutil.ReadFile("../utterance2")
                 if err != nil {
              		//nothing
 		}
                 transcribedText2 := strings.TrimSpace(string(fileBytes2))
-                    if _, err := os.Stat("../testutterance2"); err == nil {
+                    if _, err := os.Stat("../utterance2"); err == nil {
 			finished2 = transcribedText2
 			if finished1 == finished2  {
                                 transcribedText = finished2
@@ -75,12 +75,12 @@ func (s *Server) ProcessIntent(req *vtt.IntentRequest) (*vtt.IntentResponse, err
 				break
 			}
 		}
-                fileBytes3, err := ioutil.ReadFile("../testutterance3")
+                fileBytes3, err := ioutil.ReadFile("../utterance3")
                 if err != nil {
                         //nothing
                 }
                 transcribedText3 := strings.TrimSpace(string(fileBytes3))
-                    if _, err := os.Stat("../testutterance3"); err == nil {
+                    if _, err := os.Stat("../utterance3"); err == nil {
                         finished3 = transcribedText3
                         if finished2 == finished3  {
 				transcribedText = finished3
@@ -88,12 +88,12 @@ func (s *Server) ProcessIntent(req *vtt.IntentRequest) (*vtt.IntentResponse, err
                                 break
                         }
                 }
-                fileBytes4, err := ioutil.ReadFile("../testutterance4")
+                fileBytes4, err := ioutil.ReadFile("../utterance4")
                 if err != nil {
                         //nothing
                 }
                 transcribedText4 := strings.TrimSpace(string(fileBytes4))
-                    if _, err := os.Stat("../testutterance4"); err == nil {
+                    if _, err := os.Stat("../utterance4"); err == nil {
                         finished4 = transcribedText4
                         if finished3 == finished4  {
                                 transcribedText = finished4
@@ -101,12 +101,12 @@ func (s *Server) ProcessIntent(req *vtt.IntentRequest) (*vtt.IntentResponse, err
                                 break
                         }
                 }
-                fileBytes5, err := ioutil.ReadFile("../testutterance5")
+                fileBytes5, err := ioutil.ReadFile("../utterance5")
                 if err != nil {
                         //nothing
                 }
                 transcribedText5 := strings.TrimSpace(string(fileBytes5))
-                    if _, err := os.Stat("../testutterance5"); err == nil {
+                    if _, err := os.Stat("../utterance5"); err == nil {
                         finished5 = transcribedText5
                         if finished4 == finished5  {
                                 transcribedText = finished5
