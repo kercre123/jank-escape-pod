@@ -12,8 +12,6 @@ This repo has a chipper which has my voice processing code and is from an older 
 
 This also contains a vector-cloud which is also from an older tree and is modified a little bit to allow for a custom cert (instructions somewhere below). This allows Vector to communicate with your custom chipper.
 
-(The certs included are there on purpose and serve as examples, you will need to put in your own. Make sure to make certs with SANs)
-
 ## Building
 
 chipper:
