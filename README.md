@@ -38,6 +38,8 @@ Replace the certificates located in `./chipper/source.sh` with the ones you buil
 
 You will also need to change Vector's `/anki/data/assets/cozmo_resources/config/server_config.json` to the server you will be using
 
+If you want to edit the voice processor, it is all contained in `./chipper/pkg/voice_processors/noop/intent.go`
+
 ## Running
 
 To have Vector use the custom vector-cloud: stop the Anki robot processes, SCP the binary in, then restart the Anki robot processes.
