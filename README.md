@@ -4,9 +4,13 @@ This repo contains my experiments with [chipper](https://github.com/digital-drea
 
 ## What this is
 
+This is my very-prototype-phase custom escape pod. Right now; I think it has the same STT software, STT model/scorer, and processes text in a very similar way. But, the official escape pod is much much better at intent matching.
+
 chipper is the program which takes Vector's mic stream (after "hey vector") and puts it into a speech-to-text processor, then spits out an intent.
 
-This repo has a chipper which has a custom certificate, which allows it to work on a custom server.
+This repo has a chipper which has my voice processing code and is from an older tree. The "intent graph" feature seemed to break it a bit.
+
+This also contains a vector-cloud which is also from an older tree and is modified a little bit to allow for a custom cert (instructions somewhere below). This allows Vector to communicate with your custom chipper.
 
 (The certs included are there on purpose and serve as examples, you will need to put in your own. Make sure to make certs with SANs)
 
@@ -64,6 +68,8 @@ Also download [this](https://coqui.gateway.scarf.sh/english/coqui/v1.0.0-large-v
 
 ## Status
 
-Currently, on a fast desktop, the speech-to-text itself is pretty snappy and relatively accurate. Intent matching is barebones right now and only the following are implemented:
+Currently, on a fast desktop, the speech-to-text itself is pretty snappy and relatively accurate. But, you have to speak VERY clearly.
+
+Intent matching is barebones right now and only the following are implemented:
 
 go home, start exploring (i recommend saying "deploring", he understands it better), go to sleep, change your eye color, how old are you, good robot, bad robot
