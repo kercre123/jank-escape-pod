@@ -9,6 +9,7 @@ go_deps:
 	echo `go version` && cd $(PWD) && go mod download
 
 vic-cloud: go_deps
+	mkdir -p build
 	docker container run  \
 	-v "$(PWD)":/go/src/digital-dream-labs/vector-cloud \
 	-v $(GOPATH)/pkg/mod:/go/pkg/mod \
@@ -20,7 +21,8 @@ vic-cloud: go_deps
 	--trimpath \
 	-ldflags '-w -s -linkmode internal -extldflags "-static" -r /anki/lib' \
 	-o build/vic-cloud \
-	cloud/main.go
+	cloud/main.go \
+	cloud/cert.go
 
 	docker container run \
 	-v "$(PWD)":/go/src/digital-dream-labs/vector-cloud \
