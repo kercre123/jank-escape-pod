@@ -60,7 +60,7 @@ source source.sh
 
 Download [this](https://github.com/coqui-ai/STT/releases/download/v1.3.0/native_client.tflite.Linux.tar.xz) and extract it so it is accessible at ./stt (and stt binary can be laucnhed via ./stt/stt).
 
-Also download [this](https://wire.my.to/model.tflite) and [this](https://wire.my.to/model.scorer) (warning; slow, big downloads) and put them in the same ./stt/ folder
+Also download [this](https://coqui.gateway.scarf.sh/english/coqui/v1.0.0-large-vocab/model.tflite) and [this](https://coqui.gateway.scarf.sh/english/coqui/v1.0.0-large-vocab/large_vocabulary.scorer) (warning; big downloads) and put them in the same ./stt/ folder
 
 ## Status
 

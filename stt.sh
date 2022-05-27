@@ -1,7 +1,7 @@
 #!/bin/bash
 
 function sstCmd() {
-STT_TFLITE_DELEGATE=gpu ./stt/stt --model ./stt/model.tflite --scorer ./stt/model.scorer --audio ./stt/voice.wav
+STT_TFLITE_DELEGATE=gpu ./stt/stt --model ./stt/model.tflite --scorer ./stt/large_vocabulary.scorer --audio ./stt/voice.wav
 }
 
 function ffmpegCmd() {
@@ -9,12 +9,12 @@ ffmpeg -y -i /tmp/voice.ogg ./stt/voice.wav
 }
 
 function awesome() {
+sleep 1.3
 cd ../
 rm -r ./stt/voice.wav
-sleep 1
 ffmpegCmd
 sstCmd > utterance1
-sleep 0.5
+sleep 0.6
 ffmpegCmd
 sstCmd > utterance2
 ffmpegCmd

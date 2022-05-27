@@ -129,7 +129,7 @@ func (s *Server) ProcessIntent(req *vtt.IntentRequest) (*vtt.IntentResponse, err
 				Intent: &intent,
 			}
 			return r, nil
-		} else if (strings.Contains(transcribedText, "bad") || strings.Contains(transcribedText, "that ro") || strings.Contains(transcribedText, "ad ro")) {
+		} else if (strings.Contains(transcribedText, "bad") || strings.Contains(transcribedText, "that ro") || strings.Contains(transcribedText, "ad ro") || strings.Contains(transcribedText, "a root")) {
 			intent = pb.IntentResponse{
 				IsFinal: true,
 				IntentResult: &pb.IntentResult{
@@ -143,7 +143,7 @@ func (s *Server) ProcessIntent(req *vtt.IntentRequest) (*vtt.IntentResponse, err
 				Intent: &intent,
 			}
 			return r, nil
-		} else if (strings.Contains(transcribedText, "eye color") || strings.Contains(transcribedText, "colo") || strings.Contains(transcribedText, "i call her") || strings.Contains(transcribedText, "i foller") || strings.Contains(transcribedText, "icolor") || strings.Contains(transcribedText, "ecce")) {
+		} else if (strings.Contains(transcribedText, "eye color") || strings.Contains(transcribedText, "colo") || strings.Contains(transcribedText, "i call her") || strings.Contains(transcribedText, "i foller") || strings.Contains(transcribedText, "icolor") || strings.Contains(transcribedText, "ecce") || strings.Contains(transcribedText, "erior") || strings.Contains(transcribedText, "ichor")) {
 			intent = pb.IntentResponse{
 				IsFinal: true,
 				IntentResult: &pb.IntentResult{
