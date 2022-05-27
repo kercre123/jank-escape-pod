@@ -2,7 +2,7 @@ package server
 
 import (
 	"github.com/digital-dream-labs/chipper/pkg/vtt"
-	log "github.com/digital-dream-labs/hugh/log"
+//	log "github.com/digital-dream-labs/hugh/log"
 )
 
 type intentProcessor interface {
@@ -19,7 +19,7 @@ type Server struct {
 // New accepts a list of args and returns the service
 func New(opts ...Option) (*Server, error) {
 	cfg := options{
-		log: log.Base(),
+//		log: log.Base(),
 	}
 
 	for _, opt := range opts {
