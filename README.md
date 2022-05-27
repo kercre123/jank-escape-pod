@@ -10,7 +10,7 @@ chipper is the program which takes Vector's mic stream (after "hey vector") and 
 
 This repo has a chipper which has my voice processing code and is from an older tree. The "intent graph" feature seemed to break it a bit.
 
-vector-cloud is the program running on Vector himself 
+vector-cloud is the program running on Vector himself which takes the mic stream and pushes it to a chipper instance.
 
 This also contains a vector-cloud which is also from an older tree and is modified a little bit to allow for a custom cert. This allows Vector to communicate with your custom chipper.
 
