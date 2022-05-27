@@ -62,13 +62,15 @@ source source.sh
 
 ## Implement STT
 
-Download [this](https://github.com/coqui-ai/STT/releases/download/v1.3.0/native_client.tflite.Linux.tar.xz) and extract it so it is accessible at ./stt (and stt binary can be laucnhed via ./stt/stt).
+Make a folder in the same folder as the cloned repo called `stt`
+
+Download [this](https://github.com/coqui-ai/STT/releases/download/v1.3.0/native_client.tflite.Linux.tar.xz) and extract it so the files accessible at ./stt/ (and stt binary can be launched via ./stt/stt).
 
 Also download [this](https://coqui.gateway.scarf.sh/english/coqui/v1.0.0-large-vocab/model.tflite) and [this](https://coqui.gateway.scarf.sh/english/coqui/v1.0.0-large-vocab/large_vocabulary.scorer) (warning; big downloads) and put them in the same ./stt/ folder
 
 ## Status
 
-Currently, on a fast desktop, the speech-to-text itself is pretty snappy and relatively accurate. But, you have to speak VERY clearly.
+Currently, on a fast desktop, the speech-to-text itself is pretty snappy and relatively accurate. But, you have to speak loud and clearly.
 
 Intent matching is barebones right now and only the following are implemented:
 
