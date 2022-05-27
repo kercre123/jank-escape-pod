@@ -9,7 +9,7 @@ ffmpeg -y -i /tmp/voice.ogg ./stt/voice.wav
 }
 
 function awesome() {
-sleep 1.3
+sleep 0.7
 cd ../
 rm -r ./stt/voice.wav
 ffmpegCmd
