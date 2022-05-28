@@ -24,7 +24,8 @@ This also contains a vector-cloud which is also from an older tree and is modifi
 git clone https://github.com/kercre123/jank-escape-pod.git
 cd jank-escape-pod
 sudo ./setup.sh
-#Press enter once you run it
+
+#You should be able to just press enter for all of the settings, except the part where you enter an IP address or domain
 ```
 
 To install the files created by the script onto the bot, run:
@@ -41,7 +42,7 @@ To start chipper, run:
 
 ```
 cd chipper
-./start.sh
+sudo ./start.sh
 ```
 
 After all of that, try a voice command.

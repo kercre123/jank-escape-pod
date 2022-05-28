@@ -19,10 +19,16 @@ echo "Checks have passed!"
 echo
 
 function getPackages() {
-   echo "Installing required packages (ffmpeg, docker.io, golang, wget, openssl, net-tools)"
-   apt update -y
-   apt install -y ffmpeg docker.io golang wget openssl net-tools
-   systemctl start docker
+   if [[ ! -f ./vector-cloud/packagesGotten ]]; then
+      echo "Installing required packages (ffmpeg, docker.io, golang, wget, openssl, net-tools)"
+      apt update -y
+      apt install -y ffmpeg docker.io golang wget openssl net-tools
+      systemctl start docker
+      touch ./vector-cloud/packagesGotten
+   else
+      echo "Required packages already gotten."
+   fi
+   echo
 }
 
 function buildFiles() {
@@ -72,12 +78,20 @@ function IPDNSPrompt() {
 }
 
 function IPPrompt() {
-   read -p "Enter the IP address of this computer: " ipaddress
+   read -p "Enter the IP address of this machine (or of the machine you want to use this with): " ipaddress
+   if [[ ! -n ${ipaddress} ]]; then
+      echo "You must enter an IP address."
+      IPPrompt
+   fi
    address=${ipaddress}
 }
 
 function DNSPrompt() {
    read -p "Enter the domain you would like to use: " dnsurl
+   if [[ ! -n ${dnsurl} ]]; then
+      echo "You must enter a domain."
+      DNSPrompt
+   fi
    address=${dnsurl}
 }
 
@@ -150,6 +164,7 @@ function makeSource() {
    echo 'export DDL_RPC_TLS_KEY=$(cat ../certs/cert.key)' >> source.sh
    echo "DDL_RPC_CLIENT_AUTHENTICATION=NoClientCert" >> source.sh
    cd ..
+   echo
    echo "Created source.sh file!"
    echo
    cd certs
@@ -159,6 +174,7 @@ function makeSource() {
    sed -i "s/REPLACEME/${address}:${port}/g" server_config.json
    cd ..
    echo "Created!"
+   echo
 }
 
 function scpToBot() {
@@ -181,17 +197,18 @@ function scpToBot() {
    scp -i ${keyPath} ./vector-cloud/build/vic-cloud root@${botAddress}:/anki/bin/
    scp -i ${keyPath} ./certs/server_config.json root@${botAddress}:/anki/data/assets/cozmo_resources/config/
    ssh -i ${keyPath} root@${botAddress} "chmod +rwx /anki/data/assets/cozmo_resources/config/server_config.json /anki/bin/vic-cloud && systemctl start vic-cloud"
+   echo "Everything is now setup! You should be ready to run chipper. Instructions in README.md"
 }
 
 function firstPrompt() {
    read -p "Enter a number (1): " yn
    case $yn in
-      "1" ) getPackages; getSTT; generateCerts; buildFiles; makeSource; echo "Everything done! To copy everything needed to your bot, run this script like this:"; echo "Usage: sudo ./setup.sh scp <vector's ip> <path/to/ssh-key>"; echo "Example: sudo ./setup.sh scp 192.168.1.150 /home/wire/id_rsa_Vector-R2D2";;
-      "2" ) getPackages; buildFiles;;
-      "3" ) rm -f ./stt/completed; getSTT;;
-      "4" ) getPackages; generateCerts;;
-      "5" ) makeSource;;
-      "" ) getPackages; getSTT; generateCerts; buildFiles; makeSource; echo "Everything done! To copy everything needed to your bot, run this script like this:"; echo "Usage: sudo ./setup.sh scp <vector's ip> <path/to/ssh-key>"; echo "Example: sudo ./setup.sh scp 192.168.1.150 /home/wire/id_rsa_Vector-R2D2";;
+      "1" ) echo; getPackages; getSTT; generateCerts; buildFiles; makeSource; echo "Everything is done! To copy everything needed to your bot, run this script like this:"; echo "Usage: sudo ./setup.sh scp <vector's ip> <path/to/ssh-key>"; echo "Example: sudo ./setup.sh scp 192.168.1.150 /home/wire/id_rsa_Vector-R2D2";;
+      "2" ) echo; getPackages; buildFiles;;
+      "3" ) echo; rm -f ./stt/completed; getSTT;;
+      "4" ) echo; getPackages; generateCerts;;
+      "5" ) echo; makeSource;;
+      "" ) echo; getPackages; getSTT; generateCerts; buildFiles; makeSource; echo "Everything is done! To copy everything needed to your bot, run this script like this:"; echo "Usage: sudo ./setup.sh scp <vector's ip> <path/to/ssh-key>"; echo "Example: sudo ./setup.sh scp 192.168.1.150 /home/wire/id_rsa_Vector-R2D2";;
       * ) echo "Please answer with 1, 2, 3, 4, 5, or 6"; firstPrompt;;
    esac
 }
