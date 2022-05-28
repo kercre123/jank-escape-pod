@@ -32,9 +32,24 @@ function getPackages() {
    if [[ ! -f ./vector-cloud/packagesGotten ]]; then
       echo "Installing required packages (ffmpeg, docker.io, golang, wget, openssl, net-tools)"
       apt update -y
-      apt install -y ffmpeg docker.io golang wget openssl net-tools
+      apt install -y ffmpeg docker.io wget openssl net-tools
       systemctl start docker
       touch ./vector-cloud/packagesGotten
+      echo
+      echo "Installing golang binary package"
+      mkdir golang
+      cd golang
+      if [[ ${ARCH} == "x86_64" ]]; then
+         wget -q --show-progress https://go.dev/dl/go1.18.2.linux-amd64.tar.gz
+         rm -rf /usr/local/go && tar -C /usr/local -xzf go1.18.2.linux-amd64.tar.gz
+         export PATH=$PATH:/usr/local/go/bin
+      elif [[ ${ARCH} == "aarch64" ]]; then
+         wget -q --show-progress https://go.dev/dl/go1.18.2.linux-arm64.tar.gz
+         rm -rf /usr/local/go && tar -C /usr/local -xzf go1.18.2.linux-arm64.tar.gz
+         export PATH=$PATH:/usr/local/go/bin
+      fi
+      cd ..
+      rm -rf golang
    else
       echo "Required packages already gotten."
    fi
@@ -52,7 +67,7 @@ function buildFiles() {
    echo "Building chipper"
    echo
    cd ../chipper
-   make build
+   ./build.sh
    echo "./chipper/chipper and ./vector-cloud/build/vic-cloud have built successfully!"
    echo
    cd ..
@@ -68,11 +83,13 @@ function getSTT() {
       cd stt
       if [[ ${ARCH} == "x86_64" ]]; then
          wget -q --show-progress https://github.com/coqui-ai/STT/releases/download/v1.3.0/native_client.tflite.Linux.tar.xz
+         tar -xf native_client.tflite.Linux.tar.xz
+         rm -f ./native_client.tflite.Linux.tar.xz
       elif [[ ${ARCH} == "aarch64" ]]; then
          wget -q --show-progress https://github.com/coqui-ai/STT/releases/download/v1.3.0/native_client.tflite.linux.aarch64.tar.xz
+         tar -xf native_client.tflite.linux.aarch64.tar.xz
+         rm -f ./native_client.tflite.linux.aarch64.tar.xz
       fi
-      tar -xf native_client.tflite.Linux.tar.xz
-      rm -f ./native_client.tflite.Linux.tar.xz
       echo "Getting STT model..."
       wget -q --show-progress https://coqui.gateway.scarf.sh/english/coqui/v1.0.0-large-vocab/model.tflite
       echo "Getting STT scorer..."
