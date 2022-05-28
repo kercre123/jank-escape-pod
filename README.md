@@ -60,22 +60,23 @@ Currently, on a fast desktop, the speech-to-text itself is pretty snappy and acc
 
 Here is the current list of implemented actions:
 
-Good Robot
-Bad Robot
-Change your eye color
-How old are you
-Start exploring ("deploring" works better)
-Go home (or "go to your charger")
-Go to sleep
-Good morning
-Good night
-What time is it
-Goodbye
-Happy new year
-Happy holidays
-Hello
-Sign in alexa
-Sign out alexa
+
+- Good Robot
+- Bad Robot
+- Change your eye color
+- How old are you
+- Start exploring ("deploring" works better)
+- Go home (or "go to your charger")
+- Go to sleep
+- Good morning
+- Good night
+- What time is it
+- Goodbye
+- Happy new year
+- Happy holidays
+- Hello
+- Sign in alexa
+- Sign out alexa
 
 ## Credits
 
