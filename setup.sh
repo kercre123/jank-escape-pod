@@ -11,6 +11,8 @@ if [[ ${ARCH} == "x86_64" ]]; then
    echo "amd64 architecture confirmed."
 elif [[ ${ARCH} == "aarch64" ]]; then
    echo "aarch64 architecture confirmed."
+elif [[ ${ARCH} == "armv7l" ]]; then
+   echo "armv7l architecture confirmed."
 else
    echo "${ARCH} architecture not supported."
 fi
@@ -47,6 +49,10 @@ function getPackages() {
          wget -q --show-progress https://go.dev/dl/go1.18.2.linux-arm64.tar.gz
          rm -rf /usr/local/go && tar -C /usr/local -xzf go1.18.2.linux-arm64.tar.gz
          export PATH=$PATH:/usr/local/go/bin
+      elif [[ ${ARCH} == "armv7l" ]]; then
+         wget -q --show-progress https://go.dev/dl/go1.18.2.linux-armv6l.tar.gz
+         rm -rf /usr/local/go && tar -C /usr/local -xzf go1.18.2.linux-armv6l.tar.gz
+         export PATH=$PATH:/usr/local/go/bin
       fi
       cd ..
       rm -rf golang
@@ -58,11 +64,9 @@ function getPackages() {
 
 function buildCloud() {
    echo
-   echo "Building vector-cloud"
-   echo
+   #build script echos "building vic-cloud"
    cd vector-cloud
-   make docker-builder
-   make vic-cloud
+   ./build.sh
    cd ..
    echo
    echo "./vector-cloud/build/vic-cloud built!"
@@ -72,8 +76,8 @@ function buildCloud() {
 function buildChipper() {
    echo
    cd chipper
-   if [[ ${ARCH} == "aarch64" ]]; then
-      touch aarch64
+   if [[ ${ARCH} != "x86_64" ]]; then
+      touch armarch
    fi
    ./build.sh
    echo "./chipper/chipper built!"
@@ -97,6 +101,10 @@ function getSTT() {
          wget -q --show-progress https://github.com/coqui-ai/STT/releases/download/v1.3.0/native_client.tflite.linux.aarch64.tar.xz
          tar -xf native_client.tflite.linux.aarch64.tar.xz
          rm -f ./native_client.tflite.linux.aarch64.tar.xz
+      elif [[ ${ARCH} == "armv7l" ]]; then
+         wget -q --show-progress https://github.com/coqui-ai/STT/releases/download/v1.3.0/native_client.tflite.linux.armv7.tar.xz
+         tar -xf native_client.tflite.linux.armv7.tar.xz
+         rm -f ./native_client.tflite.linux.armv7.tar.xz
       fi
       echo "Getting STT model..."
       wget -q --show-progress https://coqui.gateway.scarf.sh/english/coqui/v1.0.0-large-vocab/model.tflite

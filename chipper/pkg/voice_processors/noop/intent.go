@@ -42,7 +42,7 @@ func (s *Server) ProcessIntent(req *vtt.IntentRequest) (*vtt.IntentResponse, err
 	var finished3 string
 	var finished4 string
 	var transcribedText string
-	var aarchWait int = 0
+//	var aarchWait int = 0
 	f, err := os.Create("/tmp/voice.ogg")
 	check(err)
 	cmd1 := exec.Command("/bin/bash", "../stt.sh")
@@ -79,10 +79,8 @@ func (s *Server) ProcessIntent(req *vtt.IntentRequest) (*vtt.IntentResponse, err
 		if _, err := os.Stat("/tmp/utterance1"); err == nil {
 			finished1 = transcribedText1
 		}
-		if _, err := os.Stat("./aarch64"); err == nil {
-			if aarchWait != 20 {
-				aarchWait = aarchWait + 1
-			} else {
+		if _, err := os.Stat("./armarch"); err == nil {
+			if _, err := os.Stat("/tmp/sttDone"); err == nil {
 				transcribedText = finished1
                                 log.Println("aarch: Speech has stopped, transcribed text is: " + finished1)
                                 break

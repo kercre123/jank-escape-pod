@@ -8,15 +8,17 @@ function ffmpegCmd() {
 ffmpeg -y -i /tmp/voice.ogg /tmp/voice.wav
 }
 
-function doSttAARCH64() {
+function doSttARM() {
 sleep 0.8
 cd ../
 rm -r /tmp/voice.wav
 ffmpegCmd
 sstCmd > /tmp/utterance1
+touch /tmp/sttDone
 sleep 0.5
-rm -rf /tmp/utterance*
-rm -rf /tmp/voice.wav
+rm -f /tmp/utterance*
+rm -f /tmp/voice.wav
+rm -f /tmp/sttDone
 }
 
 function doSttAMD64() {
@@ -37,8 +39,8 @@ rm -rf /tmp/utterance*
 rm -rf /tmp/voice.wav
 }
 
-if [[ $(arch) == "aarch64" ]]; then
-  doSttAARCH64 &
-else
+if [[ $(arch) == "x86_64" ]]; then
   doSttAMD64 &
+else
+  doSttARM &
 fi

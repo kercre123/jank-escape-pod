@@ -2,6 +2,8 @@
 echo "Building chipper..."
 if [[ $(arch) == "aarch64" ]]; then
    ARCH=arm64
+elif [[ $(arch) == "armv7l" ]]; then
+   ARCH=arm
 elif [[ $(arch) == "x86_64" ]]; then
    ARCH=amd64
 fi
