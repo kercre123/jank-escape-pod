@@ -32,14 +32,19 @@ function getPackages() {
 }
 
 function buildFiles() {
+   echo
    echo "Building vector-cloud"
+   echo
    cd vector-cloud
    make docker-builder
    make vic-cloud
+   echo
    echo "Building chipper"
+   echo
    cd ../chipper
    make build
    echo "./chipper/chipper and ./vector-cloud/build/vic-cloud have built successfully!"
+   echo
    cd ..
 }
 
@@ -51,13 +56,13 @@ function getSTT() {
       fi
       mkdir stt
       cd stt
-      wget https://github.com/coqui-ai/STT/releases/download/v1.3.0/native_client.tflite.Linux.tar.xz
-      tar -xvf native_client.tflite.Linux.tar.xz
+      wget -q --show-progress https://github.com/coqui-ai/STT/releases/download/v1.3.0/native_client.tflite.Linux.tar.xz
+      tar -xf native_client.tflite.Linux.tar.xz
       rm -f ./native_client.tflite.Linux.tar.xz
       echo "Getting STT model..."
-      wget https://coqui.gateway.scarf.sh/english/coqui/v1.0.0-large-vocab/model.tflite
+      wget -q --show-progress https://coqui.gateway.scarf.sh/english/coqui/v1.0.0-large-vocab/model.tflite
       echo "Getting STT scorer..."
-      wget https://coqui.gateway.scarf.sh/english/coqui/v1.0.0-large-vocab/large_vocabulary.scorer
+      wget -q --show-progress https://coqui.gateway.scarf.sh/english/coqui/v1.0.0-large-vocab/large_vocabulary.scorer
       echo
       touch completed
       echo "STT assets successfully downloaded!"
