@@ -54,7 +54,7 @@ Right now; This has the same STT software and STT model/scorer as escape pod, an
 
 Only Debian-based Linux amd64 and aarch64 is supported (Ubuntu, Linux Mint, Debian, Raspberry Pi OS, anything with APT should work). Fedora was attempted but I couldn't get the stt binary to run without lib issues.
 
-I haven't tested it on an RPi but it should work. It works on a Nintendo Switch with L4T Ubuntu but its a little slow.
+I have tested it with an RPi4 and a Nintendo Switch with L4T Ubuntu and it works fine, but it's slow.
 
 Currently, on a fast desktop, the speech-to-text itself is pretty snappy and accurate. But, you have to speak loud and clearly.
 
