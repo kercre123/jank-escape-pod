@@ -32,7 +32,7 @@ function getPackages() {
    if [[ ! -f ./vector-cloud/packagesGotten ]]; then
       echo "Installing required packages (ffmpeg, docker.io, golang, wget, openssl, net-tools)"
       apt update -y
-      apt install -y ffmpeg docker.io wget openssl net-tools
+      apt install -y ffmpeg docker.io wget openssl net-tools libsox-dev
       systemctl start docker
       touch ./vector-cloud/packagesGotten
       echo
