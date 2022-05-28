@@ -1,8 +1,18 @@
 #!/bin/bash
 
+ARCH=$(arch)
+
 if [[ ! -f /bin/apt ]]; then
  echo "APT was not found. This script is meant for debian machines only. Exiting."
  exit 1
+fi
+
+if [[ ${ARCH} == "x86_64" ]]; then
+   echo "64-bit architecture confirmed."
+elif [[ ${ARCH} == "aarch64" ]]; then
+   echo "aarch64 architecture confirmed."
+else
+   echo "${ARCH} architecture not supported."
 fi
 
 if [[ $EUID -ne 0 ]]; then
@@ -56,7 +66,11 @@ function getSTT() {
       fi
       mkdir stt
       cd stt
-      wget -q --show-progress https://github.com/coqui-ai/STT/releases/download/v1.3.0/native_client.tflite.Linux.tar.xz
+      if [[ ${ARCH} == "x86_64" ]]; then
+         wget -q --show-progress https://github.com/coqui-ai/STT/releases/download/v1.3.0/native_client.tflite.Linux.tar.xz
+      elif [[ ${ARCH} == "aarch64" ]]; then
+         wget -q --show-progress https://github.com/coqui-ai/STT/releases/download/v1.3.0/native_client.tflite.linux.aarch64.tar.xz
+      fi
       tar -xf native_client.tflite.Linux.tar.xz
       rm -f ./native_client.tflite.Linux.tar.xz
       echo "Getting STT model..."
