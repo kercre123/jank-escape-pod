@@ -150,6 +150,8 @@ func (s *Server) ProcessIntent(req *vtt.IntentRequest) (*vtt.IntentResponse, err
 		IntentPass(req, "intent_amazon_signin")
 	} else if (strings.Contains(transcribedText, "in outlet") || strings.Contains(transcribedText, "i now of elea") || strings.Contains(transcribedText, "out alexa") || strings.Contains(transcribedText, "out of ale")) {
 		IntentPass(req, "intent_amazon_signin")
+	} else if (strings.Contains(transcribedText, "love") || strings.Contains(transcribedText, "dove")) {
+		IntentPass(req, "intent_imperative_love")
 	} else {
 		log.Println("Did not match an intent.")
 		log.Println("Intent Sent: intent_system_noaudio")

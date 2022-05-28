@@ -76,6 +76,7 @@ Here is the current list of implemented actions:
 - Hello
 - Sign in alexa
 - Sign out alexa
+- I love you
 
 ## Credits
 
