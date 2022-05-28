@@ -6,7 +6,7 @@ docker-builder:
 all: vic-cloud vic-gateway
 
 go_deps:
-	echo `go version` && cd $(PWD) && go mod download
+	echo `/usr/local/go/bin/go version` && cd $(PWD) && /usr/local/go/bin/go mod download
 
 vic-cloud: go_deps
 	mkdir -p build
