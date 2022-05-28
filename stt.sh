@@ -5,7 +5,7 @@ STT_TFLITE_DELEGATE=gpu ./stt/stt --model ./stt/model.tflite --scorer ./stt/larg
 }
 
 function ffmpegCmd() {
-ffmpeg-l4t -y -i /tmp/voice.ogg /tmp/voice.wav
+ffmpeg -y -i /tmp/voice.ogg /tmp/voice.wav
 }
 
 function doSttAARCH64() {
