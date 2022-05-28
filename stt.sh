@@ -9,12 +9,12 @@ ffmpeg -y -i /tmp/voice.ogg /tmp/voice.wav
 }
 
 function awesome() {
-sleep 0.5
+sleep 0.8
 cd ../
 rm -r /tmp/voice.wav
 ffmpegCmd
 sstCmd > /tmp/utterance1
-sleep 0.6
+sleep 0.5
 ffmpegCmd
 sstCmd > /tmp/utterance2
 ffmpegCmd

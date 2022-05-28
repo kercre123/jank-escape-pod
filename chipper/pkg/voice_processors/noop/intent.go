@@ -144,7 +144,7 @@ func (s *Server) ProcessIntent(req *vtt.IntentRequest) (*vtt.IntentResponse, err
 		IntentPass(req, "intent_seasonal_happynewyear")
 	} else if (strings.Contains(transcribedText, "he holds") || strings.Contains(transcribedText, "christmas") || strings.Contains(transcribedText, "jolly") || strings.Contains(transcribedText, "bells")) {
 		IntentPass(req, "intent_seasonal_happyholidays")
-	} else if (strings.Contains(transcribedText, "hello") || strings.Contains(transcribedText, "how are you") || strings.Contains(transcribedText, "high") || strings.Contains(transcribedText, "hi")) {
+	} else if (strings.Contains(transcribedText, "hello") || strings.Contains(transcribedText, "are you") || strings.Contains(transcribedText, "high") || strings.Contains(transcribedText, "hi") || strings.Contains(transcribedText, "below")) {
 		IntentPass(req, "intent_greeting_hello")
 	} else if (strings.Contains(transcribedText, "in intellect") || strings.Contains(transcribedText, "fine in electa") || strings.Contains(transcribedText, "in alexa") || strings.Contains(transcribedText, "in an elect") || strings.Contains(transcribedText, "to alexa")) {
 		IntentPass(req, "intent_amazon_signin")
