@@ -133,7 +133,7 @@ func (s *Server) ProcessIntent(req *vtt.IntentRequest) (*vtt.IntentResponse, err
 		IntentPass(req, "intent_imperative_praise")
 	} else if (strings.Contains(transcribedText, "bad") || strings.Contains(transcribedText, "that ro") || strings.Contains(transcribedText, "ad ro") || strings.Contains(transcribedText, "a root")) {
 		IntentPass(req, "intent_imperative_abuse")
-	} else if (strings.Contains(transcribedText, "eye color") || strings.Contains(transcribedText, "colo") || strings.Contains(transcribedText, "i call her") || strings.Contains(transcribedText, "i foller") || strings.Contains(transcribedText, "icolor") || strings.Contains(transcribedText, "ecce") || strings.Contains(transcribedText, "erior") || strings.Contains(transcribedText, "ichor") || strings.Contains(transcribedText, "agricola")) {
+	} else if (strings.Contains(transcribedText, "eye color") || strings.Contains(transcribedText, "colo") || strings.Contains(transcribedText, "i call her") || strings.Contains(transcribedText, "i foller") || strings.Contains(transcribedText, "icolor") || strings.Contains(transcribedText, "ecce") || strings.Contains(transcribedText, "erior") || strings.Contains(transcribedText, "ichor") || strings.Contains(transcribedText, "agricola") || strings.Contains(transcribedText, "change")) {
 		IntentPass(req, "intent_imperative_eyecolor")
 	} else if (strings.Contains(transcribedText, "older") || strings.Contains(transcribedText, "how old") || strings.Contains(transcribedText, "old are you") || strings.Contains(transcribedText, "old or yo")) {
 		IntentPass(req, "intent_character_age")
@@ -155,7 +155,7 @@ func (s *Server) ProcessIntent(req *vtt.IntentRequest) (*vtt.IntentResponse, err
 		IntentPass(req, "intent_seasonal_happynewyear")
 	} else if (strings.Contains(transcribedText, "he holds") || strings.Contains(transcribedText, "christmas") || strings.Contains(transcribedText, "behold") || strings.Contains(transcribedText, "holiday")) {
 		IntentPass(req, "intent_seasonal_happyholidays")
-	} else if (strings.Contains(transcribedText, "hello") || strings.Contains(transcribedText, "are you") || strings.Contains(transcribedText, "high") || strings.Contains(transcribedText, "hi") || strings.Contains(transcribedText, "below") || strings.Contains(transcribedText, "little")) {
+	} else if (strings.Contains(transcribedText, "hello") || strings.Contains(transcribedText, "are you") || strings.Contains(transcribedText, "high") || strings.Contains(transcribedText, "hi") || strings.Contains(transcribedText, "below") || strings.Contains(transcribedText, "little") || strings.Contains(transcribedText, "follow")) {
 		IntentPass(req, "intent_greeting_hello")
 	} else if (strings.Contains(transcribedText, "in intellect") || strings.Contains(transcribedText, "fine in electa") || strings.Contains(transcribedText, "in alexa") || strings.Contains(transcribedText, "in an elect") || strings.Contains(transcribedText, "to alexa")) {
 		IntentPass(req, "intent_amazon_signin")
