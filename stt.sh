@@ -21,8 +21,6 @@ ffmpegCmd
 sstCmd > utterance3
 ffmpegCmd
 sstCmd > utterance4
-ffmpegCmd
-sstCmd > utterance5
 sleep 1
 rm -rf ./utterance*
 rm -rf ./stt/voice.wav

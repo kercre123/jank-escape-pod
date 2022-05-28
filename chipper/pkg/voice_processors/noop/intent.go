@@ -41,7 +41,6 @@ func (s *Server) ProcessIntent(req *vtt.IntentRequest) (*vtt.IntentResponse, err
 	var finished2 string
 	var finished3 string
 	var finished4 string
-	var finished5 string
 	var transcribedText string
 	f, err := os.Create("/tmp/voice.ogg")
 	check(err)
@@ -116,19 +115,6 @@ func (s *Server) ProcessIntent(req *vtt.IntentRequest) (*vtt.IntentResponse, err
 			if finished3 == finished4  {
 				transcribedText = finished4
 				log.Println("4: Speech has stopped, transcribed text is: " + finished4)
-				break
-			}
-		}
-		fileBytes5, err := ioutil.ReadFile("../utterance5")
-		if err != nil {
-			//nothing
-		}
-		transcribedText5 := strings.TrimSpace(string(fileBytes5))
-		if _, err := os.Stat("../utterance5"); err == nil {
-			finished5 = transcribedText5
-			if finished4 == finished5  {
-				transcribedText = finished5
-				log.Println("5: Speech has stopped, transcribed text is: " + finished5)
 				break
 			}
 		}
