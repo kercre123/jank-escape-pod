@@ -136,7 +136,7 @@ func (s *Server) ProcessIntent(req *vtt.IntentRequest) (*vtt.IntentResponse, err
 		IntentPass(req, "intent_greeting_goodmorning")
 	} else if (strings.Contains(transcribedText, "night") || strings.Contains(transcribedText, "might")) {
 		IntentPass(req, "intent_greeting_goodnight")
-	} else if (strings.Contains(transcribedText, "time is it") || strings.Contains(transcribedText, "the time")) {
+	} else if (strings.Contains(transcribedText, "time is it") || strings.Contains(transcribedText, "the time") || strings.Contains(transcribedText, "what time")) {
 		IntentPass(req, "intent_clock_time")
 	} else if (strings.Contains(transcribedText, "good bye") || strings.Contains(transcribedText, "good by") || strings.Contains(transcribedText, "good buy") || strings.Contains(transcribedText, "goodbye")) {
 		IntentPass(req, "intent_greeting_goodbye")

@@ -1,22 +1,18 @@
 # jank-escape-pod
 
-This repo contains my experiments with [chipper](https://github.com/digital-dream-labs/chipper) and [vector-cloud](https://github.com/digital-dream-labs/vector-cloud)
+This repo contains a custom Vector escape pod made from [chipper](https://github.com/digital-dream-labs/chipper) and [vector-cloud](https://github.com/digital-dream-labs/vector-cloud).
 
-## What this is
+## Program Descriptions
 
-This is my very-prototype-phase custom escape pod.
+`chipper` - Chipper is a program used on Digital Dream Lab's servers which takes in a Vector's voice stream, puts it into a speech-to-text processor, and spits out an intent. This is also likely used on the official escape pod. This repo contains an older tree of chipper which does not have the "intent graph" feature (it caused an error upon every new stream), and it now has a working voice processor.
 
-chipper is the program which takes Vector's mic stream (after "hey vector") and puts it into a speech-to-text processor, then spits out an intent.
-
-This repo has a chipper which has my voice processing code and is from an older tree. The "intent graph" feature seemed to break it a bit.
-
-vector-cloud is the program running on Vector himself which takes the mic stream and pushes it to a chipper instance.
-
-This also contains a vector-cloud which is also from an older tree and is modified a little bit to allow for a custom cert. This allows Vector to communicate with your custom chipper.
+`vector-cloud` - Vector-cloud is the program which runs on Vector himself which uploads the mic stream to a chipper instance. This repo has an older tree of vector-cloud which also does not have the "intent graph" feature and has been modified to allow for a custom CA cert.
 
 ## Configuring, Building, Installing
 
-`setup.sh` installs all necessary packages, gets the speech-to-text software, creates SSL certificates (with the address/port given), puts the public cert into the vector-cloud source, builds vector-cloud, builds chipper, creates a new server config file for Vector, and allows you to copy the new vic-cloud and server config into him.
+NOTE: This only works with OSKR-unlocked, Dev-unlocked, or Whiskey robots.
+
+`setup.sh` is a prompt-script which guides you through the installation. It can install all necessary packages, get the speech-to-text software, create SSL certificates (with the address/port given), put the public cert into the vector-cloud source, build vector-cloud, build chipper, create a new server config file for Vector, and allow you to copy the new vic-cloud and server config into him.
 
 (This currently only works on Debian-based Linux)
 
@@ -25,7 +21,8 @@ git clone https://github.com/kercre123/jank-escape-pod.git
 cd jank-escape-pod
 sudo ./setup.sh
 
-#You should be able to just press enter for all of the settings, except the part where you enter an IP address or domain
+# You should be able to just press enter for all of the settings, 
+# except the part where you must enter an IP address or domain
 ```
 
 To install the files created by the script onto the bot, run:
@@ -50,13 +47,15 @@ After all of that, try a voice command.
 
 ## Status
 
-Right now; This has the same STT software and STT model/scorer as escape pod, and I think processes text in a very similar way, but the official escape pod is currently much better at intent matching.
+Right now; This has the same STT software and STT model/scorer as escape pod, and I think processes text in a similar way, but the official escape pod is currently much better at intent matching and UX.
 
-Only Debian-based Linux amd64 and aarch64 is supported (Ubuntu, Linux Mint, Debian, Raspberry Pi OS, anything with APT should work). Fedora was attempted but I couldn't get the stt binary to run without lib issues.
+Only Debian-based Linux amd64/aarch64 is supported (Ubuntu, Linux Mint, Debian, Raspberry Pi OS, anything 64-bit with APT should work). 
+
+Fedora was attempted but I couldn't get the stt binary to run without lib issues.
 
 I have tested it with an RPi4 and a Nintendo Switch with L4T Ubuntu and it works fine, but it's slow.
 
-Currently, on a fast desktop, the speech-to-text itself is pretty snappy and accurate. But, you have to speak loud and clearly.
+Currently, on a desktop with a Ryzen 5 3600, the speech-to-text itself is about as fast (maybe even faster) than the actual chipper server prod bots use. But, you have to speak loud and clear and you have to wait a little bit longer than you usually would after the "Hey Vector" before you start talking. A quarter of a second longer maybe.
 
 Here is the current list of implemented actions:
 
