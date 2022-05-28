@@ -140,9 +140,9 @@ func (s *Server) ProcessIntent(req *vtt.IntentRequest) (*vtt.IntentResponse, err
 		IntentPass(req, "intent_clock_time")
 	} else if (strings.Contains(transcribedText, "good bye") || strings.Contains(transcribedText, "good by") || strings.Contains(transcribedText, "good buy") || strings.Contains(transcribedText, "goodbye")) {
 		IntentPass(req, "intent_greeting_goodbye")
-	} else if (strings.Contains(transcribedText, "fireworks") || strings.Contains(transcribedText, "new year") || strings.Contains(transcribedText, "happy new") || strings.Contains(transcribedText, "happy to") || strings.Contains(transcribedText, "have been") || strings.Contains(transcribedText, "i now you")) {
+	} else if (strings.Contains(transcribedText, "fireworks") || strings.Contains(transcribedText, "new year") || strings.Contains(transcribedText, "happy new") || strings.Contains(transcribedText, "happy to") || strings.Contains(transcribedText, "have been") || strings.Contains(transcribedText, "i now you") || strings.Contains(transcribedText, "no year")) {
 		IntentPass(req, "intent_seasonal_happynewyear")
-	} else if (strings.Contains(transcribedText, "he holds") || strings.Contains(transcribedText, "christmas") || strings.Contains(transcribedText, "jolly") || strings.Contains(transcribedText, "holiday")) {
+	} else if (strings.Contains(transcribedText, "he holds") || strings.Contains(transcribedText, "christmas") || strings.Contains(transcribedText, "he beholds") || strings.Contains(transcribedText, "holiday")) {
 		IntentPass(req, "intent_seasonal_happyholidays")
 	} else if (strings.Contains(transcribedText, "hello") || strings.Contains(transcribedText, "are you") || strings.Contains(transcribedText, "high") || strings.Contains(transcribedText, "hi") || strings.Contains(transcribedText, "below")) {
 		IntentPass(req, "intent_greeting_hello")
