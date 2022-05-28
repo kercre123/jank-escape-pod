@@ -56,19 +56,25 @@ function getPackages() {
    echo
 }
 
-function buildFiles() {
+function buildCloud() {
    echo
    echo "Building vector-cloud"
    echo
    cd vector-cloud
    make docker-builder
    make vic-cloud
+   cd ..
    echo
-   echo "Building chipper"
+   echo "./vector-cloud/build/vic-cloud built!"
    echo
-   cd ../chipper
+}
+
+function buildChipper() {
+   echo
+   # build script echos "building chipper"
+   cd chipper
    ./build.sh
-   echo "./chipper/chipper and ./vector-cloud/build/vic-cloud have built successfully!"
+   echo "./chipper/chipper built!"
    echo
    cd ..
 }
@@ -239,13 +245,13 @@ function scpToBot() {
 function firstPrompt() {
    read -p "Enter a number (1): " yn
    case $yn in
-      "1" ) echo; getPackages; getSTT; generateCerts; buildFiles; makeSource; echo "Everything is done! To copy everything needed to your bot, run this script like this:"; echo "Usage: sudo ./setup.sh scp <vector's ip> <path/to/ssh-key>"; echo "Example: sudo ./setup.sh scp 192.168.1.150 /home/wire/id_rsa_Vector-R2D2";;
-      "2" ) echo; getPackages; buildFiles;;
-      "3" ) echo; rm -f ./stt/completed; getSTT;;
-      "4" ) echo; getPackages; generateCerts;;
-      "5" ) echo; makeSource;;
-      "" ) echo; getPackages; getSTT; generateCerts; buildFiles; makeSource; echo "Everything is done! To copy everything needed to your bot, run this script like this:"; echo "Usage: sudo ./setup.sh scp <vector's ip> <path/to/ssh-key>"; echo "Example: sudo ./setup.sh scp 192.168.1.150 /home/wire/id_rsa_Vector-R2D2";;
-      * ) echo "Please answer with 1, 2, 3, 4, 5, or 6"; firstPrompt;;
+      "1" ) echo; getPackages; getSTT; generateCerts; buildCloud; buildChipper; makeSource; echo "Everything is done! To copy everything needed to your bot, run this script like this:"; echo "Usage: sudo ./setup.sh scp <vector's ip> <path/to/ssh-key>"; echo "Example: sudo ./setup.sh scp 192.168.1.150 /home/wire/id_rsa_Vector-R2D2";;
+      "2" ) echo; getPackages; buildCloud;;
+      "3" ) echo; getPackages; buildChipper;;
+      "4" ) echo; rm -f ./stt/completed; getSTT;;
+      "5" ) echo; getPackages; generateCerts; makeSource;;
+      "" ) echo; getPackages; getSTT; generateCerts; buildCloud; buildChipper; makeSource; echo "Everything is done! To copy everything needed to your bot, run this script like this:"; echo "Usage: sudo ./setup.sh scp <vector's ip> <path/to/ssh-key>"; echo "Example: sudo ./setup.sh scp 192.168.1.150 /home/wire/id_rsa_Vector-R2D2";;
+      * ) echo "Please answer with 1, 2, 3, 4, 5, or just press enter with no input for 1."; firstPrompt;;
    esac
 }
 
@@ -259,9 +265,10 @@ fi
 
 echo "What would you like to do?"
 echo "1: Full Setup (recommended) (builds vic-cloud and chipper, gets STT stuff, generates certs, creates source.sh file, and creates server_config.json for your bot"
-echo "2: Just build vic-cloud and chipper"
-echo "3: Just get STT stuff"
-echo "4: Just generate certs and create source.sh file"
+echo "2: Just build vic-cloud"
+echo "3: Just build chipper"
+echo "4: Just get STT stuff"
+echo "5: Just generate certs and create source.sh file"
 echo "If you have done everything you have needed, run './setup.sh scp vectorip path/to/key' to copy the new vic-cloud and server config to Vector."
 echo
 firstPrompt

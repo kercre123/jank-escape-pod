@@ -1,5 +1,14 @@
 #!/bin/bash
 
+if [[ $EUID -ne 0 ]]; then
+   echo "This script must be run as root. sudo ./start.sh"
+   exit 1
+fi
+
+if [[ -d ./chipper ]]; then
+   cd chipper
+fi
+
 if [[ ! -f ./chipper ]]; then
    if [[ -f ./go.mod ]]; then
      echo "You need to build chipper first. This can be done with the setup.sh script."

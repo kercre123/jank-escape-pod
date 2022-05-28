@@ -1,29 +1,29 @@
 #!/bin/bash
 
 function sstCmd() {
-STT_TFLITE_DELEGATE=gpu ./stt/stt --model ./stt/model.tflite --scorer ./stt/large_vocabulary.scorer --audio ./stt/voice.wav
+STT_TFLITE_DELEGATE=gpu ./stt/stt --model ./stt/model.tflite --scorer ./stt/large_vocabulary.scorer --audio /tmp/voice.wav
 }
 
 function ffmpegCmd() {
-ffmpeg -y -i /tmp/voice.ogg ./stt/voice.wav
+ffmpeg -y -i /tmp/voice.ogg /tmp/voice.wav
 }
 
 function awesome() {
-sleep 0.7
+sleep 0.5
 cd ../
-rm -r ./stt/voice.wav
+rm -r /tmp/voice.wav
 ffmpegCmd
-sstCmd > utterance1
+sstCmd > /tmp/utterance1
 sleep 0.6
 ffmpegCmd
-sstCmd > utterance2
+sstCmd > /tmp/utterance2
 ffmpegCmd
-sstCmd > utterance3
+sstCmd > /tmp/utterance3
 ffmpegCmd
-sstCmd > utterance4
-sleep 1
-rm -rf ./utterance*
-rm -rf ./stt/voice.wav
+sstCmd > /tmp/utterance4
+sleep 0.5
+rm -rf /tmp/utterance*
+rm -rf /tmp/voice.wav
 }
 
 awesome &

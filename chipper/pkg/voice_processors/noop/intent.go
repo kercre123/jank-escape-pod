@@ -50,7 +50,6 @@ func (s *Server) ProcessIntent(req *vtt.IntentRequest) (*vtt.IntentResponse, err
 	cmd1.Run()
 	var intent pb.IntentResponse
 	f.Write(data)
-	log.Println("Stream now being processed")
 	for {
 		chunk, err := req.Stream.Recv()
 		if err != nil {
@@ -71,20 +70,20 @@ func (s *Server) ProcessIntent(req *vtt.IntentRequest) (*vtt.IntentResponse, err
 		}
 		data = append(data, chunk.InputAudio...)
 		f.Write(chunk.InputAudio)
-		fileBytes1, err := ioutil.ReadFile("../utterance1")
+		fileBytes1, err := ioutil.ReadFile("/tmp/utterance1")
 		if err != nil {
 			//nothing
 		}
 		transcribedText1 := strings.TrimSpace(string(fileBytes1))
-		if _, err := os.Stat("../utterance1"); err == nil {
+		if _, err := os.Stat("/tmp/utterance1"); err == nil {
 			finished1 = transcribedText1
 		}
-		fileBytes2, err := ioutil.ReadFile("../utterance2")
+		fileBytes2, err := ioutil.ReadFile("/tmp/utterance2")
 		if err != nil {
 			//nothing
 		}
 		transcribedText2 := strings.TrimSpace(string(fileBytes2))
-		if _, err := os.Stat("../utterance2"); err == nil {
+		if _, err := os.Stat("/tmp/utterance2"); err == nil {
 			finished2 = transcribedText2
 			if finished1 == finished2  {
 				transcribedText = finished2
@@ -92,12 +91,12 @@ func (s *Server) ProcessIntent(req *vtt.IntentRequest) (*vtt.IntentResponse, err
 				break
 			}
 		}
-		fileBytes3, err := ioutil.ReadFile("../utterance3")
+		fileBytes3, err := ioutil.ReadFile("/tmp/utterance3")
 		if err != nil {
 			//nothing
 		}
 		transcribedText3 := strings.TrimSpace(string(fileBytes3))
-		if _, err := os.Stat("../utterance3"); err == nil {
+		if _, err := os.Stat("/tmp/utterance3"); err == nil {
 			finished3 = transcribedText3
 			if finished2 == finished3  {
 				transcribedText = finished3
@@ -105,12 +104,12 @@ func (s *Server) ProcessIntent(req *vtt.IntentRequest) (*vtt.IntentResponse, err
 				break
 			}
 		}
-		fileBytes4, err := ioutil.ReadFile("../utterance4")
+		fileBytes4, err := ioutil.ReadFile("/tmp/utterance4")
 		if err != nil {
 			//nothing
 		}
 		transcribedText4 := strings.TrimSpace(string(fileBytes4))
-		if _, err := os.Stat("../utterance4"); err == nil {
+		if _, err := os.Stat("/tmp/utterance4"); err == nil {
 			finished4 = transcribedText4
 			if finished3 == finished4  {
 				transcribedText = finished4
@@ -119,7 +118,7 @@ func (s *Server) ProcessIntent(req *vtt.IntentRequest) (*vtt.IntentResponse, err
 			}
 		}
 	}
-	if (strings.Contains(transcribedText, "good") || strings.Contains(transcribedText, "awesome") || strings.Contains(transcribedText, "also") || strings.Contains(transcribedText, "as some") || strings.Contains(transcribedText, "of them") || strings.Contains(transcribedText, "battle") || strings.Contains(transcribedText, "t rob") || strings.Contains(transcribedText, "the ro")) {
+	if (strings.Contains(transcribedText, "good r") || strings.Contains(transcribedText, "awesome") || strings.Contains(transcribedText, "also") || strings.Contains(transcribedText, "as some") || strings.Contains(transcribedText, "of them") || strings.Contains(transcribedText, "battle") || strings.Contains(transcribedText, "t rob") || strings.Contains(transcribedText, "the ro")) {
 		IntentPass(req, "intent_imperative_praise")
 	} else if (strings.Contains(transcribedText, "bad") || strings.Contains(transcribedText, "that ro") || strings.Contains(transcribedText, "ad ro") || strings.Contains(transcribedText, "a root")) {
 		IntentPass(req, "intent_imperative_abuse")
@@ -133,6 +132,24 @@ func (s *Server) ProcessIntent(req *vtt.IntentRequest) (*vtt.IntentResponse, err
 		IntentPass(req, "intent_system_charger")
 	} else if (strings.Contains(transcribedText, "flee") || strings.Contains(transcribedText, "sleep") || strings.Contains(transcribedText, "sheep")) {
 		IntentPass(req, "intent_system_sleep")
+	} else if (strings.Contains(transcribedText, "morning") || strings.Contains(transcribedText, "mourning") || strings.Contains(transcribedText, "mooning")) {
+		IntentPass(req, "intent_greeting_goodmorning")
+	} else if (strings.Contains(transcribedText, "night") || strings.Contains(transcribedText, "might")) {
+		IntentPass(req, "intent_greeting_goodnight")
+	} else if (strings.Contains(transcribedText, "time is it") || strings.Contains(transcribedText, "the time")) {
+		IntentPass(req, "intent_clock_time")
+	} else if (strings.Contains(transcribedText, "good bye") || strings.Contains(transcribedText, "good by") || strings.Contains(transcribedText, "good buy") || strings.Contains(transcribedText, "goodbye")) {
+		IntentPass(req, "intent_greeting_goodbye")
+	} else if (strings.Contains(transcribedText, "fireworks") || strings.Contains(transcribedText, "new year") || strings.Contains(transcribedText, "happy new") || strings.Contains(transcribedText, "confer")) {
+		IntentPass(req, "intent_seasonal_happynewyear")
+	} else if (strings.Contains(transcribedText, "he holds") || strings.Contains(transcribedText, "christmas") || strings.Contains(transcribedText, "jolly") || strings.Contains(transcribedText, "bells")) {
+		IntentPass(req, "intent_seasonal_happyholidays")
+	} else if (strings.Contains(transcribedText, "hello") || strings.Contains(transcribedText, "how are you") || strings.Contains(transcribedText, "high") || strings.Contains(transcribedText, "hi")) {
+		IntentPass(req, "intent_greeting_hello")
+	} else if (strings.Contains(transcribedText, "in intellect") || strings.Contains(transcribedText, "fine in electa") || strings.Contains(transcribedText, "in alexa") || strings.Contains(transcribedText, "in an elect") || strings.Contains(transcribedText, "to alexa")) {
+		IntentPass(req, "intent_amazon_signin")
+	} else if (strings.Contains(transcribedText, "in outlet") || strings.Contains(transcribedText, "i now of elea") || strings.Contains(transcribedText, "out alexa") || strings.Contains(transcribedText, "out of ale")) {
+		IntentPass(req, "intent_amazon_signin")
 	} else {
 		log.Println("Did not match an intent.")
 		log.Println("Intent Sent: intent_system_noaudio")
