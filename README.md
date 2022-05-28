@@ -58,9 +58,24 @@ I have tested it with an RPi4 and a Nintendo Switch with L4T Ubuntu and it works
 
 Currently, on a fast desktop, the speech-to-text itself is pretty snappy and accurate. But, you have to speak loud and clearly.
 
-Intent matching is barebones right now and only the following are implemented:
+Here is the current list of implemented actions:
 
-go home, start exploring (i recommend saying "deploring", he understands it better), go to sleep, change your eye color, how old are you, good robot, bad robot
+Good Robot
+Bad Robot
+Change your eye color
+How old are you
+Start exploring ("deploring" works better)
+Go home (or "go to your charger")
+Go to sleep
+Good morning
+Good night
+What time is it
+Goodbye
+Happy new year
+Happy holidays
+Hello
+Sign in alexa
+Sign out alexa
 
 ## Credits
 
