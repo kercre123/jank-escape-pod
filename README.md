@@ -53,7 +53,9 @@ Only Debian-based Linux amd64/aarch64 is supported (Ubuntu, Linux Mint, Debian, 
 
 Fedora was attempted but I couldn't get the stt binary to run without lib issues.
 
-I have tested it with an RPi4 and a Nintendo Switch with L4T Ubuntu and it works fine, but it's slow.
+If the server is aarch64 based, it will only process the text once instead of four times like amd64 will. This makes them about the same speed, but aarch64 may not do well with longer phrases.
+
+(aarch64 support is optimized specifically for a Nintendo Switch with L4T Ubuntu. I am not sure how well it runs on Pi.)
 
 Currently, on a desktop with a Ryzen 5 3600, the speech-to-text itself is about as fast (maybe even faster) than the actual chipper server prod bots use. But, you have to speak loud and clear and you have to wait a little bit longer than you usually would after the "Hey Vector" before you start talking. A quarter of a second longer maybe.
 
