@@ -50,6 +50,7 @@ function getPackages() {
          rm -rf /usr/local/go && tar -C /usr/local -xzf go1.18.2.linux-arm64.tar.gz
          export PATH=$PATH:/usr/local/go/bin
       elif [[ ${ARCH} == "armv7l" ]]; then
+         apt install libopus-dev
          wget -q --show-progress https://go.dev/dl/go1.18.2.linux-armv6l.tar.gz
          rm -rf /usr/local/go && tar -C /usr/local -xzf go1.18.2.linux-armv6l.tar.gz
          export PATH=$PATH:/usr/local/go/bin
