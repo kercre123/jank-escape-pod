@@ -2,7 +2,7 @@
 
 ARCH=$(arch)
 
-if [[ ! -f /bin/apt ]]; then
+if [[ ! -f /usr/bin/apt ]]; then
  echo "APT was not found. This script is meant for debian machines only. Exiting."
  exit 1
 fi
