@@ -5,10 +5,21 @@ STT_TFLITE_DELEGATE=gpu ./stt/stt --model ./stt/model.tflite --scorer ./stt/larg
 }
 
 function ffmpegCmd() {
-ffmpeg -y -i /tmp/voice.ogg /tmp/voice.wav
+ffmpeg-l4t -y -i /tmp/voice.ogg /tmp/voice.wav
 }
 
-function awesome() {
+function doSttAARCH64() {
+sleep 0.8
+cd ../
+rm -r /tmp/voice.wav
+ffmpegCmd
+sstCmd > /tmp/utterance1
+sleep 0.5
+rm -rf /tmp/utterance*
+rm -rf /tmp/voice.wav
+}
+
+function doSttAMD64() {
 sleep 0.8
 cd ../
 rm -r /tmp/voice.wav
@@ -26,4 +37,8 @@ rm -rf /tmp/utterance*
 rm -rf /tmp/voice.wav
 }
 
-awesome &
+if [[ $(arch) == "aarch64" ]]; then
+  doSttAARCH64 &
+else
+  doSttAMD64 &
+fi

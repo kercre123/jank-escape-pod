@@ -8,7 +8,7 @@ if [[ ! -f /usr/bin/apt ]]; then
 fi
 
 if [[ ${ARCH} == "x86_64" ]]; then
-   echo "64-bit architecture confirmed."
+   echo "amd64 architecture confirmed."
 elif [[ ${ARCH} == "aarch64" ]]; then
    echo "aarch64 architecture confirmed."
 else
@@ -44,6 +44,7 @@ function getPackages() {
          rm -rf /usr/local/go && tar -C /usr/local -xzf go1.18.2.linux-amd64.tar.gz
          export PATH=$PATH:/usr/local/go/bin
       elif [[ ${ARCH} == "aarch64" ]]; then
+	 touch ../chipper/aarch64
          wget -q --show-progress https://go.dev/dl/go1.18.2.linux-arm64.tar.gz
          rm -rf /usr/local/go && tar -C /usr/local -xzf go1.18.2.linux-arm64.tar.gz
          export PATH=$PATH:/usr/local/go/bin
