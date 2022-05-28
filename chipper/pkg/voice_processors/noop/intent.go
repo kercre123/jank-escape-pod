@@ -151,13 +151,13 @@ func (s *Server) ProcessIntent(req *vtt.IntentRequest) (*vtt.IntentResponse, err
 		IntentPass(req, "intent_clock_time")
 	} else if (strings.Contains(transcribedText, "good bye") || strings.Contains(transcribedText, "good by") || strings.Contains(transcribedText, "good buy") || strings.Contains(transcribedText, "goodbye")) {
 		IntentPass(req, "intent_greeting_goodbye")
-	} else if (strings.Contains(transcribedText, "fireworks") || strings.Contains(transcribedText, "new year") || strings.Contains(transcribedText, "happy new") || strings.Contains(transcribedText, "happy to") || strings.Contains(transcribedText, "have been") || strings.Contains(transcribedText, "i now you") || strings.Contains(transcribedText, "no year") || strings.Contains(transcribedText, "enee") || strings.Contains(transcribedText, "i never")) {
+	} else if (strings.Contains(transcribedText, "fireworks") || strings.Contains(transcribedText, "new year") || strings.Contains(transcribedText, "happy new") || strings.Contains(transcribedText, "happy to") || strings.Contains(transcribedText, "have been") || strings.Contains(transcribedText, "i now you") || strings.Contains(transcribedText, "no year") || strings.Contains(transcribedText, "enee") || strings.Contains(transcribedText, "i never") || strings.Contains(transcribedText, "knew her")) {
 		IntentPass(req, "intent_seasonal_happynewyear")
 	} else if (strings.Contains(transcribedText, "he holds") || strings.Contains(transcribedText, "christmas") || strings.Contains(transcribedText, "behold") || strings.Contains(transcribedText, "holiday")) {
 		IntentPass(req, "intent_seasonal_happyholidays")
 	} else if (strings.Contains(transcribedText, "hello") || strings.Contains(transcribedText, "are you") || strings.Contains(transcribedText, "high") || strings.Contains(transcribedText, "hi") || strings.Contains(transcribedText, "below") || strings.Contains(transcribedText, "little") || strings.Contains(transcribedText, "follow")) {
 		IntentPass(req, "intent_greeting_hello")
-	} else if (strings.Contains(transcribedText, "in intellect") || strings.Contains(transcribedText, "fine in electa") || strings.Contains(transcribedText, "in alexa") || strings.Contains(transcribedText, "in an elect") || strings.Contains(transcribedText, "to alexa")) {
+	} else if (strings.Contains(transcribedText, "in intellect") || strings.Contains(transcribedText, "fine in electa") || strings.Contains(transcribedText, "in alexa") || strings.Contains(transcribedText, "in an elect") || strings.Contains(transcribedText, "to alexa") || strings.Contains(transcribedText, "in angelica")) {
 		IntentPass(req, "intent_amazon_signin")
 	} else if (strings.Contains(transcribedText, "in outlet") || strings.Contains(transcribedText, "i now of elea") || strings.Contains(transcribedText, "out alexa") || strings.Contains(transcribedText, "out of ale")) {
 		IntentPass(req, "intent_amazon_signin")
