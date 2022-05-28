@@ -44,7 +44,6 @@ function getPackages() {
          rm -rf /usr/local/go && tar -C /usr/local -xzf go1.18.2.linux-amd64.tar.gz
          export PATH=$PATH:/usr/local/go/bin
       elif [[ ${ARCH} == "aarch64" ]]; then
-	 touch ../chipper/aarch64
          wget -q --show-progress https://go.dev/dl/go1.18.2.linux-arm64.tar.gz
          rm -rf /usr/local/go && tar -C /usr/local -xzf go1.18.2.linux-arm64.tar.gz
          export PATH=$PATH:/usr/local/go/bin
@@ -72,8 +71,10 @@ function buildCloud() {
 
 function buildChipper() {
    echo
-   # build script echos "building chipper"
    cd chipper
+   if [[ ${ARCH} == "aarch64" ]]; then
+      touch aarch64
+   fi
    ./build.sh
    echo "./chipper/chipper built!"
    echo
