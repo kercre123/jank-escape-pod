@@ -16,7 +16,7 @@ This also contains a vector-cloud which is also from an older tree and is modifi
 
 ## Configuring, Building, Installing
 
-`setup.sh` installs all necessary packages, creates the certificates (with the address/port given), puts the cert into the vector-cloud source, builds vector-cloud, builds chipper, creates a new server config file for Vector, and allows you to copy the new vic-cloud and server config into him.
+`setup.sh` installs all necessary packages, gets the speech-to-text software, creates SSL certificates (with the address/port given), puts the public cert into the vector-cloud source, builds vector-cloud, builds chipper, creates a new server config file for Vector, and allows you to copy the new vic-cloud and server config into him.
 
 (This currently only works on Debian-based Linux)
 
@@ -51,6 +51,8 @@ After all of that, try a voice command.
 ## Status
 
 Right now; This has the same STT software and STT model/scorer as escape pod, and I think processes text in a very similar way, but the official escape pod is currently much better at intent matching.
+
+Only Debian-based Linux is supported (Ubuntu, Linux Mint, Debian, Raspberry Pi OS, anything with APT should work). Fedora was attempted but I couldn't get the stt binary to run without lib issues.
 
 Currently, on a fast desktop, the speech-to-text itself is pretty snappy and accurate. But, you have to speak loud and clearly.
 
