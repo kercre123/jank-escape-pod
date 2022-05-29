@@ -20,7 +20,7 @@ elif [[ "${UNAME}" == *"aarch64"* ]]; then
    ARCH="aarch64"
    echo "aarch64 architecture confirmed."
 elif [[ "${UNAME}" == *"armv7l"* ]]; then
-   ARCH="armvl7"
+   ARCH="armv7l"
    echo "armv7l architecture confirmed."
 else
    echo "Your CPU architecture not supported. This script currently supports x86_64, aarch64, and armv7l."
