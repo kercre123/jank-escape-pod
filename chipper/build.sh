@@ -1,10 +1,11 @@
 #!/bin/bash
+UNAME=$(uname -a)
 echo "Building chipper..."
-if [[ $(arch) == "aarch64" ]]; then
+if [[ "${UNAME}" == *"aarch64"* ]]; then
    ARCH=arm64
-elif [[ $(arch) == "armv7l" ]]; then
+elif [[ "${UNAME}" == *"armv7l"* ]]; then
    ARCH=arm
-elif [[ $(arch) == "x86_64" ]]; then
+elif [[ "${UNAME}" == *"x86_64"* ]]; then
    ARCH=amd64
 fi
 CGO_ENABLED=0 GOOS=linux GOARCH=${ARCH} /usr/local/go/bin/go build \

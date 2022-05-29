@@ -39,7 +39,8 @@ rm -rf /tmp/utterance*
 rm -rf /tmp/voice.wav
 }
 
-if [[ $(arch) == "x86_64" ]]; then
+UNAME=$(uname -a)
+if [[ "${UNAME}" == *"x86_64"*  ]]; then
   doSttAMD64 &
 else
   doSttARM &

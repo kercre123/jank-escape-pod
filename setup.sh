@@ -1,20 +1,30 @@
 #!/bin/bash
 
-ARCH=$(arch)
+UNAME=$(uname -a)
 
-if [[ ! -f /usr/bin/apt ]]; then
- echo "APT was not found. This script is meant for debian machines only. Exiting."
- exit 1
+if [[ -f /usr/bin/apt ]]; then
+   TARGET="debian"
+   echo "Debian-based Linux confirmed."
+elif [[ -f /usr/bin/pacman ]]; then
+   TARGET="arch"
+   echo "Arch Linux confirmed."
+else
+   echo "This OS is not supported. This script currently supports Arch and Debian-based Linux."
+   exit 1
 fi
 
-if [[ ${ARCH} == "x86_64" ]]; then
+if [[ "${UNAME}" == *"x86_64"* ]]; then
+   ARCH="x86_64"
    echo "amd64 architecture confirmed."
-elif [[ ${ARCH} == "aarch64" ]]; then
+elif [[ "${UNAME}" == *"aarch64"* ]]; then
+   ARCH="aarch64"
    echo "aarch64 architecture confirmed."
-elif [[ ${ARCH} == "armv7l" ]]; then
+elif [[ "${UNAME}" == *"armv7l"* ]]; then
+   ARCH="armvl7"
    echo "armv7l architecture confirmed."
 else
-   echo "${ARCH} architecture not supported."
+   echo "Your CPU architecture not supported. This script currently supports x86_64, aarch64, and armv7l."
+   exit 1
 fi
 
 if [[ $EUID -ne 0 ]]; then
@@ -33,8 +43,13 @@ echo
 function getPackages() {
    if [[ ! -f ./vector-cloud/packagesGotten ]]; then
       echo "Installing required packages (ffmpeg, docker.io, golang, wget, openssl, net-tools)"
-      apt update -y
-      apt install -y ffmpeg docker.io wget openssl net-tools libsox-dev
+      if [[ ${TARGET} == "debian" ]]; then
+         apt update -y
+         apt install -y ffmpeg docker.io wget openssl net-tools libsox-dev libopus-dev make
+      elif [[ ${TARGET} == "arch" ]]; then
+         pacman -Sy --noconfirm
+         sudo pacman -S --noconfirm ffmpeg docker wget openssl net-tools sox opus make
+      fi
       systemctl start docker
       touch ./vector-cloud/packagesGotten
       echo
@@ -50,7 +65,6 @@ function getPackages() {
          rm -rf /usr/local/go && tar -C /usr/local -xzf go1.18.2.linux-arm64.tar.gz
          export PATH=$PATH:/usr/local/go/bin
       elif [[ ${ARCH} == "armv7l" ]]; then
-         apt install libopus-dev
          wget -q --show-progress https://go.dev/dl/go1.18.2.linux-armv6l.tar.gz
          rm -rf /usr/local/go && tar -C /usr/local -xzf go1.18.2.linux-armv6l.tar.gz
          export PATH=$PATH:/usr/local/go/bin
@@ -241,7 +255,27 @@ function scpToBot() {
       echo "The key that was provided was not found. Exiting."
       exit 0
    fi
-   botBuildProp=$(ssh -i ${keyPath} root@${botAddress} "cat /build.prop")
+   ssh -i ${keyPath} root@${botAddress} "cat /build.prop" > /tmp/sshTest 2>> /tmp/sshTest
+   botBuildProp=$(cat /tmp/sshTest)
+   if [[ "${botBuildProp}" == *"no mutual signature"* ]]; then
+      echo
+      echo "An entry must be made to the ssh config for this to work. Would you like the script to do this?"
+      echo "1: Yes"
+      echo "2: No (exit)"
+      echo
+      function rsaAddPrompt() {
+      read -p "Enter a number (1): " yn
+      case $yn in
+        "1" ) echo;;
+        "2" ) exit 0;;
+        "" ) echo;;
+        * ) echo "Please answer with 1 or 2."; rsaAddPrompt;;
+      esac
+      }
+      rsaAddPrompt
+      echo "PubkeyAcceptedKeyTypes +ssh-rsa" >> /etc/ssh/ssh_config
+      botBuildProp=$(ssh -i ${keyPath} root@${botAddress} "cat /build.prop")
+   fi
    if [[ ! "${botBuildProp}" == *"ro.build"* ]]; then
       echo "Unable to communicate with robot. Make sure this computer and Vector are on the same network and the IP address is correct. Exiting."
       exit 0
@@ -250,7 +284,8 @@ function scpToBot() {
    scp -i ${keyPath} ./vector-cloud/build/vic-cloud root@${botAddress}:/anki/bin/
    scp -i ${keyPath} ./certs/server_config.json root@${botAddress}:/anki/data/assets/cozmo_resources/config/
    ssh -i ${keyPath} root@${botAddress} "chmod +rwx /anki/data/assets/cozmo_resources/config/server_config.json /anki/bin/vic-cloud && systemctl start vic-cloud"
-   echo "Everything is now setup! You should be ready to run chipper. Instructions in README.md"
+   rm -f /tmp/sshTest
+   echo "Everything is now setup! You should be ready to run chipper. sudo ./chipper/start.sh"
 }
 
 function firstPrompt() {

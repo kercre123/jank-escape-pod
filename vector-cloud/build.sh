@@ -1,5 +1,6 @@
 #!/bin/bash
-if [[ $(arch) == "armv7l" ]]; then
+UNAME=$(uname -a)
+if [[ "${UNAME}" == *"armv7l"* ]]; then
 	mkdir -p build
 	echo "Building vic-cloud (direct because host arch is armv7l)..."
   	/usr/local/go/bin/go build  \
