@@ -46,8 +46,8 @@ After all of that, try a voice command.
 
 ## Speech Tips
 
--You have to speak loud and clear for chipper to understand.
--You also need to wait a little longer after Vector's ding (after "hey vector" is said) before saying the rest of the command than you would expect. Maybe a half a second longer. This is an issue and is being worked on.
+- You have to speak loud and clear for chipper to understand.
+- You also need to wait a little longer after Vector's ding (after "hey vector" is said) before saying the rest of the command than you would expect. Maybe a half a second longer. This is an issue and is being worked on.
 
 ## Status
 
