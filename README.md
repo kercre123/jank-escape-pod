@@ -14,7 +14,7 @@ NOTE: This only works with OSKR-unlocked, Dev-unlocked, or Whiskey robots.
 
 `setup.sh` is a prompt-script which guides you through the installation. It can install all necessary packages, get the speech-to-text software, create SSL certificates (with the address/port given), put the public cert into the vector-cloud source, build vector-cloud, build chipper, create a new server config file for Vector, and allow you to copy the new vic-cloud and server config into him.
 
-(This currently only works on Debian-based Linux)
+(This currently only works on Arch or Debian-based Linux)
 
 ```
 git clone https://github.com/kercre123/jank-escape-pod.git
@@ -46,31 +46,39 @@ After all of that, try a voice command.
 
 ## Speech Tips
 
-You have to speak loud and clear for chipper to understand.
-
-You also need to wait a little longer after Vector's ding (after "hey vector" is said) before saying the rest of the command than you would expect. Maybe a half a second longer. This is an issue and is being worked on.
+-You have to speak loud and clear for chipper to understand.
+-You also need to wait a little longer after Vector's ding (after "hey vector" is said) before saying the rest of the command than you would expect. Maybe a half a second longer. This is an issue and is being worked on.
 
 ## Status
 
-This has the same STT software and STT model/scorer as escape pod, and I think processes text in a similar way, but the official escape pod is currently much better at intent matching and UX.
+OS Support:
 
-Debian-based Linux amd64/aarch64/armv7l is supported (Ubuntu, Linux Mint, Debian, Raspberry Pi OS, anything with APT should work). 
+- Arch ✅
+- Debian/Ubuntu/other APT distros ✅
 
-Fedora was attempted but I couldn't get the stt binary to run without lib issues.
+Architecture Support:
 
-If the server is ARM based, it will only process the text once instead of four times like amd64 will. This makes them about the same speed, but aarch64 may not do well with longer phrases.
+- amd64/x86_64 ✅
+- arm64/aarch64 ✅
+- arm32/armv7l ✅
 
-A Raspberry Pi 4 running this is actually pretty fast, maybe even faster than the official escape pod.
+General Notes:
 
-Currently, on a desktop with a Ryzen 5 3600, the speech-to-text itself is about as fast (maybe even faster) than the actual chipper server prod bots use. 
+- On a Raspberry Pi 4 4GB, the text is processed very fast, possibly faster than the official escape pod.
+- Intent matching is very simple right now.
+- If the architecture is AMD64, the text is processed 4 times so longer phrases get processed fully. Text is only processed once on arm32/arm64 for speed.
 
-Speech tips: You have to speak loud and clear and you have to wait a little bit longer than you usually would after the "Hey Vector" before you start talking. A quarter of a second longer maybe.
+Known Issues:
 
-Here is the current list of implemented actions:
+- On Fedora, the STT binary does not start and errors out.
+- Not many intents are currently supported at the moment.
+- The audio stream is a little cut off at the beginning.
+- Intent matching just works via "if string.Contains" at the moment. It will be overhauled.
 
+Current Implemented Actions:
 
-- Good Robot
-- Bad Robot
+- Good robot
+- Bad robot
 - Change your eye color
 - How old are you
 - Start exploring ("deploring" works better)
