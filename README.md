@@ -84,8 +84,8 @@ Known Issues:
 
 - On Fedora, the STT binary does not start and errors out with "Illegal Instruction (core dumped)"
 - Not many intents are currently supported at the moment.
+- Intents that need parameters (like "my name is <name>") are not supported currently.
 - The audio stream is a little cut off at the beginning.
-- Intent matching is very simple and just works via a bunch of IF/ORs at the moment. It will be overhauled.
 - Only one robot can be streaming audio to it at a time.
 
 Current Implemented Actions:
@@ -107,6 +107,16 @@ Current Implemented Actions:
 - Sign in alexa
 - Sign out alexa
 - I love you
+- Move forward
+- Turn left
+- Turn right
+- Roll your cube
+- Pop a wheelie
+- Fistbump
+- Blackjack (say yes/no instead of hit/stand)
+- Yes (affirmative)
+- No (negative)
+- What's my name
 
 ## Credits
 
