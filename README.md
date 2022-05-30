@@ -52,27 +52,40 @@ After all of that, try a voice command.
 
 OS Support:
 
-- Arch ✅
-- Debian/Ubuntu/other APT distros ✅
+- Arch
+- Debian/Ubuntu/other APT distros
 
 Architecture Support:
 
-- amd64/x86_64 ✅
-- arm64/aarch64 ✅
-- arm32/armv7l ✅
+- amd64/x86_64
+- arm64/aarch64
+- arm32/armv7l
+
+Things I've Gotten It Working On:
+
+- Raspberry Pi 4B+ 4GB RAM with Raspberry Pi OS
+	- Very fast, recommended platform
+	- Doesn't matter if it is 32-bit or 64-bit
+- Raspberry Pi 4B+ 4GB RAM with Manjaro 22.04
+- Nintendo Switch with L4T Ubuntu
+- Desktop with Ryzen 5 3600, 16 GB RAM with Ubuntu 22.04
+- Laptop with mobile i7 with Linux Mint 20.3
+- Pixel 4 with Andronix
+	- Ubuntu 20.04 CLi Only, run `apt install git sudo` before and make sure to not use the default port 443. Port 6001 worked for me.
 
 General Notes:
 
 - On a Raspberry Pi 4 4GB, the text is processed very fast, possibly faster than the official escape pod.
-- Intent matching is very simple right now.
 - If the architecture is AMD64, the text is processed 4 times so longer phrases get processed fully. Text is only processed once on arm32/arm64 for speed.
+- If you get this error when running chipper, you are using a port that is being taken up by a program already: `panic: runtime error: invalid memory address or nil pointer dereference`
+	- Run `./setup.sh` with the 5th option to change the port, you will need to push files to the bot again.
 
 Known Issues:
 
 - On Fedora, the STT binary does not start and errors out with "Illegal Instruction (core dumped)"
 - Not many intents are currently supported at the moment.
 - The audio stream is a little cut off at the beginning.
-- Intent matching just works via "if string.Contains" at the moment. It will be overhauled.
+- Intent matching is very simple and just works via a bunch of IF/ORs at the moment. It will be overhauled.
 
 Current Implemented Actions:
 
