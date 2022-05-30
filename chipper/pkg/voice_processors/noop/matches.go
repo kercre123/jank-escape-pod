@@ -29,7 +29,7 @@ var turnRightList = []string{"rn right", "go right", "e right", "ernie", "credit
 var rollCubeList = []string{"roll cu", "roll your cu", "all your cu", "roll human", "yorke", "old your he"}
 var wheelieList = []string{"pop a w", "polwhele", "olwen", "i wieland", "do a wheel", "doorstone", "thibetan", "powell"}
 var fistbumpList = []string{"this pomp", "this pump", "bump", "fistb", "fistf", "this book", "pisto", "with pomp",
-"fison", "first", "fifth", "were fifteen", "if bump", "wisdom"}
+"fison", "first", "fifth", "were fifteen", "if bump", "wisdom", "this bu"}
 var blackjackList = []string{"black", "cards", "game"}
 var affirmativeList = []string{"yes", "correct", "hit"}
 var negativeList = []string{"no", "dont", "stand"}
