@@ -42,15 +42,14 @@ echo
 
 function getPackages() {
    if [[ ! -f ./vector-cloud/packagesGotten ]]; then
-      echo "Installing required packages (ffmpeg, docker.io, golang, wget, openssl, net-tools)"
+      echo "Installing required packages (ffmpeg, golang, wget, openssl, net-tools, sox, opus)"
       if [[ ${TARGET} == "debian" ]]; then
          apt update -y
-         apt install -y ffmpeg docker.io wget openssl net-tools libsox-dev libopus-dev make
+         apt install -y ffmpeg wget openssl net-tools libsox-dev libopus-dev make
       elif [[ ${TARGET} == "arch" ]]; then
          pacman -Sy --noconfirm
-         sudo pacman -S --noconfirm ffmpeg docker wget openssl net-tools sox opus make
+         sudo pacman -S --noconfirm ffmpeg wget openssl net-tools sox opus make
       fi
-      systemctl start docker
       touch ./vector-cloud/packagesGotten
       echo
       echo "Installing golang binary package"
@@ -78,6 +77,16 @@ function getPackages() {
 }
 
 function buildCloud() {
+   echo
+   echo "Installing docker"
+   if [[ ${TARGET} == "debian" ]]; then
+      apt update -y
+      apt install -y docker.io
+   elif [[ ${TARGET} == "arch" ]]; then
+      pacman -Sy --noconfirm
+      sudo pacman -S --noconfirm docker
+   fi
+   systemctl start docker
    echo
    #build script echos "building vic-cloud"
    cd vector-cloud
@@ -218,6 +227,12 @@ function makeSource() {
       port=${portPrompt}
    else
       port="443"
+   fi
+   if netstat -pln | grep :${port}; then
+      echo
+      netstat -pln | grep :${port}
+      echo
+      echo "Something may be using port ${port}. Make sure that port is free before you start chipper."
    fi
    echo "export DDL_RPC_PORT=${port}" > source.sh
    echo 'export DDL_RPC_TLS_CERTIFICATE=$(cat ../certs/cert.crt)' >> source.sh
