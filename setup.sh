@@ -42,13 +42,13 @@ echo
 
 function getPackages() {
    if [[ ! -f ./vector-cloud/packagesGotten ]]; then
-      echo "Installing required packages (ffmpeg, golang, wget, openssl, net-tools, sox, opus)"
+      echo "Installing required packages (ffmpeg, golang, wget, openssl, net-tools, iproute2, sox, opus)"
       if [[ ${TARGET} == "debian" ]]; then
          apt update -y
-         apt install -y ffmpeg wget openssl net-tools libsox-dev libopus-dev make
+         apt install -y ffmpeg wget openssl net-tools libsox-dev libopus-dev make iproute2
       elif [[ ${TARGET} == "arch" ]]; then
          pacman -Sy --noconfirm
-         sudo pacman -S --noconfirm ffmpeg wget openssl net-tools sox opus make
+         sudo pacman -S --noconfirm ffmpeg wget openssl net-tools sox opus make iproute2
       fi
       touch ./vector-cloud/packagesGotten
       echo
@@ -120,15 +120,15 @@ function getSTT() {
       if [[ ${ARCH} == "x86_64" ]]; then
          wget -q --show-progress https://github.com/coqui-ai/STT/releases/download/v1.3.0/native_client.tflite.Linux.tar.xz
          tar -xf native_client.tflite.Linux.tar.xz
-         rm -f ./native_client.tflite.Linux.tar.xz
+         #rm -f ./native_client.tflite.Linux.tar.xz
       elif [[ ${ARCH} == "aarch64" ]]; then
          wget -q --show-progress https://github.com/coqui-ai/STT/releases/download/v1.3.0/native_client.tflite.linux.aarch64.tar.xz
          tar -xf native_client.tflite.linux.aarch64.tar.xz
-         rm -f ./native_client.tflite.linux.aarch64.tar.xz
+         #rm -f ./native_client.tflite.linux.aarch64.tar.xz
       elif [[ ${ARCH} == "armv7l" ]]; then
          wget -q --show-progress https://github.com/coqui-ai/STT/releases/download/v1.3.0/native_client.tflite.linux.armv7.tar.xz
          tar -xf native_client.tflite.linux.armv7.tar.xz
-         rm -f ./native_client.tflite.linux.armv7.tar.xz
+         #rm -f ./native_client.tflite.linux.armv7.tar.xz
       fi
       echo "Getting STT model..."
       wget -q --show-progress https://coqui.gateway.scarf.sh/english/coqui/v1.0.0-large-vocab/model.tflite
