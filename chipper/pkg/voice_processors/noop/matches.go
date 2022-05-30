@@ -24,12 +24,12 @@ var signOutAlexaList = []string{"in outlet", "i now of elea", "out alexa", "out 
 var loveList = []string{"love", "dove"}
 var forwardList = []string{"forward", "for ward", "for word"}
 var turnAroundList = []string{"around", "one eighty", "one ate he"}
-var turnLeftList = []string{"rn left", "go left", "e left"}
-var turnRightList = []string{"rn right", "go right", "e right"}
+var turnLeftList = []string{"rn left", "go left", "e left", "ed left", "ernest"}
+var turnRightList = []string{"rn right", "go right", "e right", "ernie", "credit"}
 var rollCubeList = []string{"roll cu", "roll your cu", "all your cu", "roll human", "yorke", "old your he"}
 var wheelieList = []string{"pop a w", "polwhele", "olwen", "i wieland", "do a wheel", "doorstone", "thibetan", "powell"}
 var fistbumpList = []string{"this pomp", "this pump", "bump", "fistb", "fistf", "this book", "pisto", "with pomp",
-"fison", "first", "fifth", "were fifteen", "if bump", }
+"fison", "first", "fifth", "were fifteen", "if bump", "wisdom"}
 var blackjackList = []string{"black", "cards", "game"}
 var affirmativeList = []string{"yes", "correct", "hit"}
 var negativeList = []string{"no", "dont", "stand"}
