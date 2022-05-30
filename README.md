@@ -71,7 +71,7 @@ Things I've Gotten It Working On:
 - Desktop with Ryzen 5 3600, 16 GB RAM with Ubuntu 22.04
 - Laptop with mobile i7 with Linux Mint 20.3
 - Pixel 4 with Andronix
-	- Ubuntu 20.04 CLi Only, run `apt install git sudo` before and make sure to not use the default port 443. Port 6001 worked for me.
+	- Ubuntu 20.04 CLi Only, run `apt update` then `apt install git sudo` before and make sure to not use the default port 443. Port 6001 worked for me.
 
 General Notes:
 
@@ -86,6 +86,7 @@ Known Issues:
 - Not many intents are currently supported at the moment.
 - The audio stream is a little cut off at the beginning.
 - Intent matching is very simple and just works via a bunch of IF/ORs at the moment. It will be overhauled.
+- Only one robot can be streaming audio to it at a time.
 
 Current Implemented Actions:
 
