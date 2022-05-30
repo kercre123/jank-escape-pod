@@ -24,16 +24,16 @@ var signOutAlexaList = []string{"in outlet", "i now of elea", "out alexa", "out 
 var loveList = []string{"love", "dove"}
 var forwardList = []string{"forward", "for ward", "for word"}
 var turnAroundList = []string{"around", "one eighty", "one ate he"}
-var turnLeftList = []string{"rn left", "go left"}
-var turnRightList = []string{"rn right", "go right"}
-var rollCubeList = []string{"roll cu", "roll your cu", "all your cu", "roll human"}
-var wheelieList = []string{"pop a w", "polwhele", "olwen", "i wieland", "do a wheel", "doorstone"}
+var turnLeftList = []string{"rn left", "go left", "e left"}
+var turnRightList = []string{"rn right", "go right", "e right"}
+var rollCubeList = []string{"roll cu", "roll your cu", "all your cu", "roll human", "yorke", "old your he"}
+var wheelieList = []string{"pop a w", "polwhele", "olwen", "i wieland", "do a wheel", "doorstone", "thibetan", "powell"}
 var fistbumpList = []string{"this pomp", "this pump", "bump", "fistb", "fistf", "this book", "pisto", "with pomp",
-"fison", "first", "fifth", "were fifteen"}
+"fison", "first", "fifth", "were fifteen", "if bump", }
 var blackjackList = []string{"black", "cards", "game"}
 var affirmativeList = []string{"yes", "correct", "hit"}
 var negativeList = []string{"no", "dont", "stand"}
-var nameAskList = []string{"s my name"}
+var nameAskList = []string{"s my name", "t my name"}
 var photoList = []string{"photo", "foto", "selby"}
 
 // make sure intentsList perfectly matches up with matchListList
@@ -42,7 +42,7 @@ var intentsList = []string{"intent_imperative_praise", "intent_imperative_abuse"
 "intent_character_age", "intent_explore_start", "intent_system_charger", "intent_system_sleep",
 "intent_greeting_goodmorning", "intent_greeting_goodnight", "intent_clock_time",
 "intent_greeting_goodbye", "intent_seasonal_happynewyear", "intent_seasonal_happyholidays",
-"intent_greeting_hello", "intent_amazon_signin", "intent_amazon_signin", "intent_imperative_love", 
+"intent_greeting_hello", "intent_amazon_signin", "intent_amazon_signin", "intent_imperative_love",
 "intent_imperative_forward", "intent_imperative_turnaround", "intent_imperative_turnleft",
 "intent_imperative_turnright", "intent_play_rollcube", "intent_play_popawheelie", "intent_play_fistbump",
 "intent_play_blackjack", "intent_imperative_affirmative", "intent_imperative_negative", "intent_names_ask",
