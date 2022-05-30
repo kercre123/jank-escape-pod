@@ -24,13 +24,19 @@ sudo ./setup.sh
 # You should be able to just press enter for all of the settings
 ```
 
-To install the files created by the script onto the bot, run:
+Now install the files created by the script onto the bot:
 
 `sudo ./setup.sh scp <vectorip> <path/to/key>`
 
 Example:
 
 `sudo ./setup.sh scp 192.168.1.150 /home/wire/id_rsa_Vector-R2D2`
+
+If you are on my custom software (WireOS), you do not have to provide an SSH key,
+
+Example:
+
+`sudo ./setup.sh scp 192.168.1.150`
 
 The bot should now be configured to communicate with your server.
 
