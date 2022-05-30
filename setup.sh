@@ -154,12 +154,13 @@ function IPDNSPrompt() {
 }
 
 function IPPrompt() {
-   read -p "Enter the IP address of this machine (or of the machine you want to use this with): " ipaddress
+   IPADDRESS=$(ip -4 addr | grep $(ip addr | awk '/state UP/ {print $2}' | sed 's/://g') | grep -oP '(?<=inet\s)\d+(\.\d+){3}')
+   read -p "Enter the IP address of the machine you are running this script on (${IPADDRESS}): " ipaddress
    if [[ ! -n ${ipaddress} ]]; then
-      echo "You must enter an IP address."
-      IPPrompt
+      address=${IPADDRESS}
+   else
+      address=${ipaddress}
    fi
-   address=${ipaddress}
 }
 
 function DNSPrompt() {
