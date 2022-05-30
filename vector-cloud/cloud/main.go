@@ -11,6 +11,8 @@ import (
 	"os/signal"
 	"syscall"
 	"time"
+	"strings"
+	"io/ioutil"
 
 	"github.com/digital-dream-labs/vector-cloud/internal/clad/cloud"
 	"github.com/digital-dream-labs/vector-cloud/internal/cloudproc"
@@ -30,9 +32,6 @@ var checkDataFunc func() error // overwritten by platform_linux.go
 var certErrorFunc func() bool  // overwritten by cert_error_dev.go, determines if error should cause exit
 var platformOpts []cloudproc.Option
 
-               var pool = rootcerts.ServerCertPool()
-        var _ = pool.AppendCertsFromPEM([]byte(awesomeCert))
-
 func getSocketWithRetry(name string, client string) ipc.Conn {
 	for {
 		sock, err := ipc.NewUnixgramClient(name, client)
@@ -46,9 +45,6 @@ func getSocketWithRetry(name string, client string) ipc.Conn {
 }
 
 func getHTTPClient() *http.Client {
-	// Create a HTTP client with given CA cert pool so we can use https on device
-//		pool := rootcerts.ServerCertPool()
-//        _ = pool.AppendCertsFromPEM([]byte(awesomeCert))
 	return &http.Client{
 		Transport: &http.Transport{
 			TLSClientConfig: &tls.Config{
@@ -81,6 +77,16 @@ func testReader(serv ipc.Server, send voice.MsgSender) {
 
 func main() {
 
+if _, err := os.Stat("/data/data/customCaCert.crt"); err == nil {
+		certBytes, err := ioutil.ReadFile("/data/data/customCaCert.crt")
+		if err != nil {
+			//nothing
+		}
+		awesomeCert := strings.TrimSpace(string(certBytes))
+		var pool = rootcerts.ServerCertPool()
+		var _ = pool.AppendCertsFromPEM([]byte(awesomeCert))
+		log.Println("Loaded custom cert!")
+}
 	log.Println("Starting up")
 
 	robot.InstallCrashReporter(log.Tag)

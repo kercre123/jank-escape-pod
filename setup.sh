@@ -202,14 +202,7 @@ function generateCerts() {
    echo "Generating key and cert"
    openssl req -x509 -nodes -days 730 -newkey rsa:2048 -keyout cert.key -out cert.crt -config san.conf
    echo
-   cd ../vector-cloud
-   certCrt=$(cat ../certs/cert.crt)
-   echo "package main" > cloud/cert.go
-   echo >> cloud/cert.go
-   echo 'const awesomeCert = `' >> cloud/cert.go
-   cat ../certs/cert.crt >> cloud/cert.go
-   echo -n '`' >> cloud/cert.go
-   echo "Certificates generated and put into vector-cloud source!"
+   echo "Certificates generated!"
    cd ..
 }
 
@@ -283,7 +276,8 @@ function scpToBot() {
    ssh -i ${keyPath} root@${botAddress} "mount -o rw,remount / && systemctl stop vic-cloud && mv /anki/data/assets/cozmo_resources/config/server_config.json /anki/data/assets/cozmo_resources/config/server_config.json.bak"
    scp -i ${keyPath} ./vector-cloud/build/vic-cloud root@${botAddress}:/anki/bin/
    scp -i ${keyPath} ./certs/server_config.json root@${botAddress}:/anki/data/assets/cozmo_resources/config/
-   ssh -i ${keyPath} root@${botAddress} "chmod +rwx /anki/data/assets/cozmo_resources/config/server_config.json /anki/bin/vic-cloud && systemctl start vic-cloud"
+   scp -i ${keyPath} ./certs/cert.crt root@${botAddress}:/data/data/customCaCert.crt
+   ssh -i ${keyPath} root@${botAddress} "chmod +rwx /anki/data/assets/cozmo_resources/config/server_config.json /anki/bin/vic-cloud /data/data/customCaCert.crt && systemctl start vic-cloud"
    rm -f /tmp/sshTest
    echo "Everything is now setup! You should be ready to run chipper. sudo ./chipper/start.sh"
 }
@@ -291,12 +285,12 @@ function scpToBot() {
 function firstPrompt() {
    read -p "Enter a number (1): " yn
    case $yn in
-      "1" ) echo; getPackages; getSTT; generateCerts; buildCloud; buildChipper; makeSource; echo "Everything is done! To copy everything needed to your bot, run this script like this:"; echo "Usage: sudo ./setup.sh scp <vector's ip> <path/to/ssh-key>"; echo "Example: sudo ./setup.sh scp 192.168.1.150 /home/wire/id_rsa_Vector-R2D2";;
+      "1" ) echo; getPackages; getSTT; generateCerts; buildChipper; makeSource; echo "Everything is done! To copy everything needed to your bot, run this script like this:"; echo "Usage: sudo ./setup.sh scp <vector's ip> <path/to/ssh-key>"; echo "Example: sudo ./setup.sh scp 192.168.1.150 /home/wire/id_rsa_Vector-R2D2";;
       "2" ) echo; getPackages; buildCloud;;
       "3" ) echo; getPackages; buildChipper;;
       "4" ) echo; rm -f ./stt/completed; getSTT;;
       "5" ) echo; getPackages; generateCerts; makeSource;;
-      "" ) echo; getPackages; getSTT; generateCerts; buildCloud; buildChipper; makeSource; echo "Everything is done! To copy everything needed to your bot, run this script like this:"; echo "Usage: sudo ./setup.sh scp <vector's ip> <path/to/ssh-key>"; echo "Example: sudo ./setup.sh scp 192.168.1.150 /home/wire/id_rsa_Vector-R2D2";;
+      "" ) echo; getPackages; getSTT; generateCerts; buildChipper; makeSource; echo "Everything is done! To copy everything needed to your bot, run this script like this:"; echo "Usage: sudo ./setup.sh scp <vector's ip> <path/to/ssh-key>"; echo "Example: sudo ./setup.sh scp 192.168.1.150 /home/wire/id_rsa_Vector-R2D2";;
       * ) echo "Please answer with 1, 2, 3, 4, 5, or just press enter with no input for 1."; firstPrompt;;
    esac
 }
@@ -310,7 +304,7 @@ if [[ $1 == "scp" ]]; then
 fi
 
 echo "What would you like to do?"
-echo "1: Full Setup (recommended) (builds vic-cloud and chipper, gets STT stuff, generates certs, creates source.sh file, and creates server_config.json for your bot"
+echo "1: Full Setup (recommended) (builds chipper, gets STT stuff, generates certs, creates source.sh file, and creates server_config.json for your bot"
 echo "2: Just build vic-cloud"
 echo "3: Just build chipper"
 echo "4: Just get STT stuff"

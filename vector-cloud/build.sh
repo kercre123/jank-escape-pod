@@ -8,8 +8,7 @@ if [[ "${UNAME}" == *"armv7l"* ]]; then
 	--trimpath \
 	-ldflags '-w -s -linkmode internal -extldflags "-static" -r /anki/lib' \
 	-o build/vic-cloud \
-	cloud/main.go \
-	cloud/cert.go
+	cloud/main.go
 else
 	echo "Building vic-cloud (docker)..."
 	make docker-builder
