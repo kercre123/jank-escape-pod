@@ -12,7 +12,7 @@ This repo contains a custom Vector escape pod made from [chipper](https://github
 
 NOTE: This only works with OSKR-unlocked, Dev-unlocked, or Whiskey robots.
 
-`setup.sh` is a prompt-script which guides you through the installation. It can install all necessary packages, get the speech-to-text software, create SSL certificates (with the address/port given), put the public cert into the vector-cloud source, build vector-cloud, build chipper, create a new server config file for Vector, and allow you to copy the new vic-cloud and server config into him.
+`setup.sh` is a prompt-script which guides you through the installation. It can install all necessary packages, get the speech-to-text software, create SSL certificates (with the address/port given), build vector-cloud, build chipper, create a new server config file for Vector, and allow you to copy the new vic-cloud and server config into him.
 
 (This currently only works on Arch or Debian-based Linux)
 
@@ -21,8 +21,7 @@ git clone https://github.com/kercre123/jank-escape-pod.git
 cd jank-escape-pod
 sudo ./setup.sh
 
-# You should be able to just press enter for all of the settings, 
-# except the part where you must enter an IP address or domain
+# You should be able to just press enter for all of the settings
 ```
 
 To install the files created by the script onto the bot, run:
@@ -70,7 +69,7 @@ General Notes:
 
 Known Issues:
 
-- On Fedora, the STT binary does not start and errors out.
+- On Fedora, the STT binary does not start and errors out with "Illegal Instruction (core dumped)"
 - Not many intents are currently supported at the moment.
 - The audio stream is a little cut off at the beginning.
 - Intent matching just works via "if string.Contains" at the moment. It will be overhauled.
