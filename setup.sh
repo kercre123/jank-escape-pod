@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo
+
 UNAME=$(uname -a)
 
 if [[ -f /usr/bin/apt ]]; then
@@ -120,15 +122,15 @@ function getSTT() {
       if [[ ${ARCH} == "x86_64" ]]; then
          wget -q --show-progress https://github.com/coqui-ai/STT/releases/download/v1.3.0/native_client.tflite.Linux.tar.xz
          tar -xf native_client.tflite.Linux.tar.xz
-         #rm -f ./native_client.tflite.Linux.tar.xz
+         rm -f ./native_client.tflite.Linux.tar.xz
       elif [[ ${ARCH} == "aarch64" ]]; then
          wget -q --show-progress https://github.com/coqui-ai/STT/releases/download/v1.3.0/native_client.tflite.linux.aarch64.tar.xz
          tar -xf native_client.tflite.linux.aarch64.tar.xz
-         #rm -f ./native_client.tflite.linux.aarch64.tar.xz
+         rm -f ./native_client.tflite.linux.aarch64.tar.xz
       elif [[ ${ARCH} == "armv7l" ]]; then
          wget -q --show-progress https://github.com/coqui-ai/STT/releases/download/v1.3.0/native_client.tflite.linux.armv7.tar.xz
          tar -xf native_client.tflite.linux.armv7.tar.xz
-         #rm -f ./native_client.tflite.linux.armv7.tar.xz
+         rm -f ./native_client.tflite.linux.armv7.tar.xz
       fi
       echo "Getting STT model..."
       wget -q --show-progress https://coqui.gateway.scarf.sh/english/coqui/v1.0.0-large-vocab/model.tflite
@@ -254,11 +256,26 @@ function makeSource() {
 }
 
 function scpToBot() {
-   if [[ ! -n ${keyPath} ]]; then
-      echo "To copy vic-cloud and server_config.json to your robot, run this script like this:"
+   if [[ ! -n ${botAddress} ]]; then
+      echo "To copy vic-cloud and server_config.json to your OSKR robot, run this script like this:"
       echo "Usage: sudo ./setup.sh scp <vector's ip> <path/to/ssh-key>"
       echo "Example: sudo ./setup.sh scp 192.168.1.150 /home/wire/id_rsa_Vector-R2D2"
+      echo
+      echo "If your Vector is on Wire's custom software or you have an old dev build, you can run this command without an SSH key:"
+      echo "Example: sudo ./setup.sh scp 192.168.1.150"
+      echo
       exit 0
+   fi
+   if [[ ! -n ${keyPath} ]]; then
+      echo
+      if [[ ! -f ./ssh_root_key ]]; then
+         echo "Key not provided, downloading ssh_root_key..."
+         wget http://wire.my.to:81/ssh_root_key
+      else
+         echo "Key not provided, using ./ssh_root_key (already there)..."
+      fi
+      chmod 600 ./ssh_root_key
+      keyPath="./ssh_root_key"
    fi
    if [[ ! -f ${keyPath} ]]; then
       echo "The key that was provided was not found. Exiting."
@@ -286,7 +303,7 @@ function scpToBot() {
       botBuildProp=$(ssh -i ${keyPath} root@${botAddress} "cat /build.prop")
    fi
    if [[ ! "${botBuildProp}" == *"ro.build"* ]]; then
-      echo "Unable to communicate with robot. Make sure this computer and Vector are on the same network and the IP address is correct. Exiting."
+      echo "Unable to communicate with robot. The key may be invalid, the bot may not be unlocked, or this device and the robot are not on the same network."
       exit 0
    fi
    ssh -i ${keyPath} root@${botAddress} "mount -o rw,remount / && systemctl stop vic-cloud && mv /anki/data/assets/cozmo_resources/config/server_config.json /anki/data/assets/cozmo_resources/config/server_config.json.bak"
@@ -295,24 +312,25 @@ function scpToBot() {
    scp -i ${keyPath} ./certs/cert.crt root@${botAddress}:/data/data/customCaCert.crt
    ssh -i ${keyPath} root@${botAddress} "chmod +rwx /anki/data/assets/cozmo_resources/config/server_config.json /anki/bin/vic-cloud /data/data/customCaCert.crt && systemctl start vic-cloud"
    rm -f /tmp/sshTest
+   echo
    echo "Everything is now setup! You should be ready to run chipper. sudo ./chipper/start.sh"
+   echo
 }
 
 function firstPrompt() {
    read -p "Enter a number (1): " yn
    case $yn in
-      "1" ) echo; getPackages; getSTT; generateCerts; buildChipper; makeSource; echo "Everything is done! To copy everything needed to your bot, run this script like this:"; echo "Usage: sudo ./setup.sh scp <vector's ip> <path/to/ssh-key>"; echo "Example: sudo ./setup.sh scp 192.168.1.150 /home/wire/id_rsa_Vector-R2D2";;
+      "1" ) echo; getPackages; getSTT; generateCerts; buildChipper; makeSource; echo "Everything is done! To copy everything needed to your bot, run this script like this:"; echo "Usage: sudo ./setup.sh scp <vector's ip> <path/to/ssh-key>"; echo "Example: sudo ./setup.sh scp 192.168.1.150 /home/wire/id_rsa_Vector-R2D2"; echo; echo "If your Vector is on Wire's custom software or you have an old dev build, you can run this command without an SSH key:"; echo "Example: sudo ./setup.sh scp 192.168.1.150"; echo ;;
       "2" ) echo; getPackages; buildCloud;;
       "3" ) echo; getPackages; buildChipper;;
       "4" ) echo; rm -f ./stt/completed; getSTT;;
       "5" ) echo; getPackages; generateCerts; makeSource;;
-      "" ) echo; getPackages; getSTT; generateCerts; buildChipper; makeSource; echo "Everything is done! To copy everything needed to your bot, run this script like this:"; echo "Usage: sudo ./setup.sh scp <vector's ip> <path/to/ssh-key>"; echo "Example: sudo ./setup.sh scp 192.168.1.150 /home/wire/id_rsa_Vector-R2D2";;
+      "" ) echo; getPackages; getSTT; generateCerts; buildChipper; makeSource; echo "Everything is done! To copy everything needed to your bot, run this script like this:"; echo "Usage: sudo ./setup.sh scp <vector's ip> <path/to/ssh-key>"; echo "Example: sudo ./setup.sh scp 192.168.1.150 /home/wire/id_rsa_Vector-R2D2"; echo; echo "If your Vector is on Wire's custom software or you have an old dev build, you can run this command without an SSH key:"; echo "Example: sudo ./setup.sh scp 192.168.1.150"; echo ;;
       * ) echo "Please answer with 1, 2, 3, 4, 5, or just press enter with no input for 1."; firstPrompt;;
    esac
 }
 
 if [[ $1 == "scp" ]]; then
-   echo "SCPing..."
    botAddress=$2
    keyPath=$3
    scpToBot
@@ -328,4 +346,3 @@ echo "5: Just generate certs and create source.sh file"
 echo "If you have done everything you have needed, run './setup.sh scp vectorip path/to/key' to copy the new vic-cloud and server config to Vector."
 echo
 firstPrompt
-echo "completed"
