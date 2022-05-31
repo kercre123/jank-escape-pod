@@ -27,7 +27,8 @@ var turnAroundList = []string{"around", "one eighty", "one ate he"}
 var turnLeftList = []string{"rn left", "go left", "e left", "ed left", "ernest"}
 var turnRightList = []string{"rn right", "go right", "e right", "ernie", "credit", "ed right"}
 var rollCubeList = []string{"roll cu", "roll your cu", "all your cu", "roll human", "yorke", "old your he"}
-var wheelieList = []string{"pop a w", "polwhele", "olwen", "i wieland", "do a wheel", "doorstone", "thibetan", "powell"}
+var wheelieList = []string{"pop a w", "polwhele", "olwen", "i wieland", "do a wheel", "doorstone", "thibetan", "powell",
+"welst", "a wheel"}
 var fistbumpList = []string{"this pomp", "this pump", "bump", "fistb", "fistf", "this book", "pisto", "with pomp",
 "fison", "first", "fifth", "were fifteen", "if bump", "wisdom", "this bu"}
 var blackjackList = []string{"black", "cards", "game"}
