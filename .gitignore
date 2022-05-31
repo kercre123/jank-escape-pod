@@ -7,3 +7,5 @@
 /vector-cloud/cloud/cert.go
 /chipper/aarch64
 /chipper/armarch
+/chipper/processOnce
+/ssh_root_key
