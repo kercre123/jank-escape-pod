@@ -79,7 +79,7 @@ Things It Has Worked On:
 - Android Devices
 	- Pixel 4, Note 4, Razer Phone, Oculus Quest 2, OnePlus 7 Pro, Moto G6, Pixel 2
 	- [Termux](https://github.com/termux/termux-app) proot-distro: Use Ubuntu, make sure to use a port above 1024 and not the default 443.
-	- Linux Deploy: Works stock, just make sure to choose the arch that matches your device in settings.
+	- Linux Deploy: Works stock, just make sure to choose the arch that matches your device in settings. Also use a bigger image size, at least 3 GB.
 
 General Notes:
 
