@@ -2,7 +2,7 @@ package noop
 
 // This is where you can add intents and more possible utterances for intents
 
-var praiseList = []string{"good r", "awesome", "also", "as some", "of them", "battle", "t rob", "the ro"}
+var praiseList = []string{"good", "awesome", "also", "as some", "of them", "battle", "t rob", "the ro"}
 var abuseList = []string{"bad", "that ro", "ad ro", "a root"}
 var eyeColorList = []string{"eye color", "colo", "i call her", "i foller", "icolor", "ecce", "erior", "ichor", "agricola",
 	"change"}
@@ -39,7 +39,7 @@ var photoList = []string{"photo", "foto", "selby"}
 
 // make sure intentsList perfectly matches up with matchListList
 
-var intentsList = []string{"intent_imperative_praise", "intent_imperative_abuse", "intent_imperative_eyecolor",
+var intentsList = []string{"intent_imperative_eyecolor",
 	"intent_character_age", "intent_explore_start", "intent_system_charger", "intent_system_sleep",
 	"intent_greeting_goodmorning", "intent_greeting_goodnight", "intent_clock_time",
 	"intent_greeting_goodbye", "intent_seasonal_happynewyear", "intent_seasonal_happyholidays",
@@ -47,10 +47,10 @@ var intentsList = []string{"intent_imperative_praise", "intent_imperative_abuse"
 	"intent_imperative_forward", "intent_imperative_turnaround", "intent_imperative_turnleft",
 	"intent_imperative_turnright", "intent_play_rollcube", "intent_play_popawheelie", "intent_play_fistbump",
 	"intent_play_blackjack", "intent_imperative_affirmative", "intent_imperative_negative", "intent_names_ask",
-	"intent_photo_take_extend"}
+	"intent_photo_take_extend", "intent_imperative_praise", "intent_imperative_abuse"}
 
-var matchListList = [][]string{praiseList, abuseList, eyeColorList, howOldList, exploreStartList,
+var matchListList = [][]string{eyeColorList, howOldList, exploreStartList,
 	chargerList, sleepList, morningList, nightList, timeList, byeList, newYearList, holidaysList,
 	helloList, signInAlexaList, signOutAlexaList, loveList, forwardList, turnAroundList, turnLeftList,
 	turnRightList, rollCubeList, wheelieList, fistbumpList, blackjackList, affirmativeList, negativeList,
-	nameAskList, photoList}
+	nameAskList, photoList, praiseList, abuseList}
