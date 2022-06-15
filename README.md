@@ -145,6 +145,6 @@ Current Implemented Actions:
 
 ## Credits
 
-[Digital Dream Labs](https://github.com/digital-dream-labs) for saving Vector and for open sourcing chipper which made this possible
-[dietb](https://github.com/dietb) for rewriting chipper and giving tips
-[GitHub Copilot](https://copilot.github.com/) for being awesome
+- [Digital Dream Labs](https://github.com/digital-dream-labs) for saving Vector and for open sourcing chipper which made this possible
+- [dietb](https://github.com/dietb) for rewriting chipper and giving tips
+- [GitHub Copilot](https://copilot.github.com/) for being awesome
