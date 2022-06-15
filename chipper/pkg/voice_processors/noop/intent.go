@@ -143,12 +143,12 @@ func paramChecker(req *vtt.IntentRequest, intent string, speechText string) {
 	} else if strings.Contains(intent, "intent_imperative_volumelevel_extend") {
 		isParam = true
 		newIntent = intent
-		if strings.Contains(speechText, "low") || strings.Contains(speechText, "quiet") {
-			intentParam = "volume_level"
-			intentParamValue = "VOLUME_1"
-		} else if strings.Contains(speechText, "medium low") {
+		if strings.Contains(speechText, "medium low") || strings.Contains(speechText, "media low") || strings.Contains(speechText, "medium bow") || strings.Contains(speechText, "media bow") {
 			intentParam = "volume_level"
 			intentParamValue = "VOLUME_2"
+		} else if strings.Contains(speechText, "low") || strings.Contains(speechText, "quiet") {
+			intentParam = "volume_level"
+			intentParamValue = "VOLUME_1"
 		} else if strings.Contains(speechText, "medium high") || strings.Contains(speechText, "media high") || strings.Contains(speechText, "medium hide") || strings.Contains(speechText, "media hide") {
 			intentParam = "volume_level"
 			intentParamValue = "VOLUME_4"
