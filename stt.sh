@@ -11,7 +11,7 @@ ffmpeg -y -i /tmp/${botNum}voice.ogg /tmp/${botNum}voice.wav
 }
 
 function doSttARM() {
-sleep 0.8
+sleep 1.5
 cd ../
 rm -r /tmp/*voice.wav
 ffmpegCmd
