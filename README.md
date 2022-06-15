@@ -83,18 +83,16 @@ Things It Has Worked On:
 
 General Notes:
 
-- On a Raspberry Pi 4 4GB, the text is processed very fast, possibly faster than the official escape pod.
 - If the architecture is AMD64, the text is processed 4 times so longer phrases get processed fully. Text is only processed once on arm32/arm64 for speed.
+	- This means longer phrases may not work well on arm devices.
 - If you get this error when running chipper, you are using a port that is being taken up by a program already: `panic: runtime error: invalid memory address or nil pointer dereference`
 	- Run `./setup.sh` with the 5th option to change the port, you will need to push files to the bot again.
 
 Known Issues:
 
-- On Fedora, the STT binary does not start and errors out with "Illegal Instruction (core dumped)"
-- Not many intents are currently supported at the moment.
-- Intents that need parameters (like "my name is <name>") are not supported currently.
+- Implemented Actions list is not complete yet.
 - The audio stream is a little cut off at the beginning.
-- Only one robot can be streaming audio to it at a time.
+	- This may be an issue with vector-cloud/chipper itself, it seems to happen in normal operation with the prod servers too.
 
 Current Implemented Actions:
 
