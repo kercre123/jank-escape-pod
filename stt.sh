@@ -16,7 +16,7 @@ cd ../
 rm -r /tmp/*voice.wav
 ffmpegCmd
 sstCmd > /tmp/${botNum}utterance1
-touch /tmp/sttDone
+touch /tmp/${botNum}sttDone
 sleep 0.5
 rm -f /tmp/*utterance*
 rm -f /tmp/*voice.wav
