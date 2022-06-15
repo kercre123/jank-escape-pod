@@ -83,13 +83,13 @@ Things It Has Worked On:
 
 General Notes:
 
-- If the architecture is AMD64, the text is processed 4 times so longer phrases get processed fully. Text is only processed once on arm32/arm64 for speed.
-	- This means longer phrases may not work well on arm devices.
+- If the architecture is AMD64, the text is processed 4 times so longer phrases get processed fully. Text is only processed once on arm32/arm64 for speed and reliability.
 - If you get this error when running chipper, you are using a port that is being taken up by a program already: `panic: runtime error: invalid memory address or nil pointer dereference`
 	- Run `./setup.sh` with the 5th option to change the port, you will need to push files to the bot again.
 
 Known Issues:
 
+- ARM processing is slow until I find a good way to deal with the end of speech on (comparitively) slow hardware.
 - Implemented Actions list is not complete yet.
 - The audio stream is a little cut off at the beginning.
 	- This may be an issue with vector-cloud/chipper itself, it seems to happen in normal operation with the prod servers too.
