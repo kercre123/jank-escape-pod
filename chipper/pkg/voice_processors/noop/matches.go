@@ -2,8 +2,6 @@ package noop
 
 // This is where you can add intents and more possible utterances for intents
 
-var praiseList = []string{"good", "awesome", "also", "as some", "of them", "battle", "t rob", "the ro"}
-var abuseList = []string{"bad", "that ro", "ad ro", "a root"}
 var eyeColorList = []string{"eye color", "colo", "i call her", "i foller", "icolor", "ecce", "erior", "ichor", "agricola",
 	"change"}
 var howOldList = []string{"older", "how old", "old are you", "old or yo"}
@@ -36,6 +34,8 @@ var affirmativeList = []string{"yes", "correct", "hit"}
 var negativeList = []string{"no", "dont", "stand"}
 var nameAskList = []string{"s my name", "t my name"}
 var photoList = []string{"photo", "foto", "selby"}
+var praiseList = []string{"good", "awesome", "also", "as some", "of them", "battle", "t rob", "the ro"}
+var abuseList = []string{"bad", "that ro", "ad ro", "a root"}
 
 // make sure intentsList perfectly matches up with matchListList
 
