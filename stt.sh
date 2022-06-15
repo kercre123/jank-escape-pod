@@ -1,5 +1,9 @@
 #!/bin/bash
 
+if [[ -f armarch ]]; then
+  touch slowsys
+fi
+
 botNum=$1
 
 function sstCmd() {
@@ -10,7 +14,7 @@ function ffmpegCmd() {
 ffmpeg -y -i /tmp/${botNum}voice.ogg /tmp/${botNum}voice.wav
 }
 
-function doSttARM() {
+function doSttSlow() {
 sleep 2
 cd ../
 rm -r /tmp/*voice.wav
@@ -23,7 +27,7 @@ rm -f /tmp/*voice.wav
 rm -f /tmp/*sttDone
 }
 
-function doSttAMD64() {
+function doSttFast() {
 sleep 0.8
 cd ../
 rm -r /tmp/*voice.wav
@@ -42,8 +46,8 @@ rm -rf /tmp/*voice.wav
 }
 
 UNAME=$(uname -a)
-if [[ "${UNAME}" == *"x86_64"*  ]]; then
-  doSttAMD64 &
+if [[ -f slowsys ]]; then
+  doSttSlow &
 else
-  doSttARM &
+  doSttFast &
 fi

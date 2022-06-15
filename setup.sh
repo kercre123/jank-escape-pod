@@ -103,7 +103,11 @@ function buildChipper() {
    echo
    cd chipper
    if [[ ${ARCH} != "x86_64" ]]; then
-      touch armarch
+      echo
+      echo "This system is not x86_64. This system will be considered slow and STT will be done slightly differently."
+      echo "If you feel like this system is fast enough for regular STT processing, run: sudo rm -f ./chipper/slowsys"
+      echo
+      touch slowsys
    fi
    ./build.sh
    echo "./chipper/chipper built!"

@@ -132,10 +132,10 @@ func (s *Server) ProcessIntent(req *vtt.IntentRequest) (*vtt.IntentResponse, err
 		if _, err := os.Stat("/tmp/" + strconv.Itoa(botNum) + "utterance1"); err == nil {
 			finished1 = transcribedText1
 		}
-		if _, err := os.Stat("./armarch"); err == nil {
+		if _, err := os.Stat("./slowsys"); err == nil {
 			if _, err := os.Stat("/tmp/" + strconv.Itoa(botNum) + "sttDone"); err == nil {
 				transcribedText = finished1
-				log.Println("aarch: Speech has stopped, transcribed text is: " + finished1)
+				log.Println("1: Speech has stopped, transcribed text is: " + finished1)
 				break
 			}
 		} else {
