@@ -3,7 +3,7 @@ package noop
 // This is where you can add intents and more possible utterances for intents
 
 var eyeColorList = []string{"eye color", "colo", "i call her", "i foller", "icolor", "ecce", "erior", "ichor", "agricola",
-	"change"}
+	"change", "oracular"}
 var howOldList = []string{"older", "how old", "old are you", "old or yo"}
 var exploreStartList = []string{"start", "plor", "owing", "tailoring", "oding", "oring", "pling"}
 var chargerList = []string{"charge", "home", "go to your", "church"}
@@ -15,7 +15,6 @@ var byeList = []string{"good bye", "good by", "good buy", "goodbye"}
 var newYearList = []string{"fireworks", "new year", "happy new", "happy to", "have been", "i now you", "no year", "enee",
 	"i never", "knew her"}
 var holidaysList = []string{"he holds", "christmas", "behold", "holiday"}
-var helloList = []string{"hello", "are you", "high", "below", "little", "follow"}
 var signInAlexaList = []string{"in intellect", "fine in electa", "in alex", "ing alex", "in an elect", "to alex",
 	"in angelica"}
 var signOutAlexaList = []string{"in outlet", "i now of elea", "out alexa", "out of ale"}
@@ -33,9 +32,20 @@ var blackjackList = []string{"black", "cards", "game"}
 var affirmativeList = []string{"yes", "correct", "hit"}
 var negativeList = []string{"no", "dont", "stand"}
 var nameAskList = []string{"s my name", "t my name"}
-var photoList = []string{"photo", "foto", "selby"}
-var praiseList = []string{"good", "awesome", "also", "as some", "of them", "battle", "t rob", "the ro"}
-var abuseList = []string{"bad", "that ro", "ad ro", "a root"}
+var photoList = []string{"photo", "foto", "selby", "capture", "picture"}
+var praiseList = []string{"good", "awesome", "also", "as some", "of them", "battle", "t rob", "the ro", "amazing"}
+var abuseList = []string{"bad", "that ro", "ad ro", "a root", "hate", "horrible"}
+var weatherList = []string{"weather", "whether", "the other"}
+var apologizeList = []string{"sorry", "apologize", "apologise"}
+var backupList = []string{"back", "a way", "away"}
+var volumeDownList = []string{"all you down", "volume down", "down volume", "down the volume", "quieter"}
+var quietList = []string{"quiet", "stop"}
+var volumeUpList = []string{"all you up", "volume up", "up volume", "up the volume", "louder"}
+var lookAtMeList = []string{"stare", "at me"}
+var volumeSpecificList = []string{"all you", "volume", "loudness"}
+var shutUpList = []string{"shut up"}
+var helloList = []string{"hello", "are you", "high", "below", "little", "follow"}
+var comeList = []string{"come", "to me"}
 
 // make sure intentsList perfectly matches up with matchListList
 
@@ -43,14 +53,19 @@ var intentsList = []string{"intent_imperative_eyecolor",
 	"intent_character_age", "intent_explore_start", "intent_system_charger", "intent_system_sleep",
 	"intent_greeting_goodmorning", "intent_greeting_goodnight", "intent_clock_time",
 	"intent_greeting_goodbye", "intent_seasonal_happynewyear", "intent_seasonal_happyholidays",
-	"intent_greeting_hello", "intent_amazon_signin", "intent_amazon_signin", "intent_imperative_love",
+	"intent_amazon_signin", "intent_amazon_signin", "intent_imperative_love",
 	"intent_imperative_forward", "intent_imperative_turnaround", "intent_imperative_turnleft",
 	"intent_imperative_turnright", "intent_play_rollcube", "intent_play_popawheelie", "intent_play_fistbump",
 	"intent_play_blackjack", "intent_imperative_affirmative", "intent_imperative_negative", "intent_names_ask",
-	"intent_photo_take_extend", "intent_imperative_praise", "intent_imperative_abuse"}
+	"intent_photo_take_extend", "intent_imperative_praise", "intent_imperative_abuse", "intent_weather_extend",
+	"intent_imperative_apologize", "intent_imperative_backup", "intent_imperative_volumedown",
+	"intent_imperative_quiet", "intent_imperative_volumeup", "intent_imperative_lookatme", "intent_imperative_volumelevel_extend",
+	"intent_imperative_shutup", "intent_greeting_hello", "intent_imperative_come"}
 
 var matchListList = [][]string{eyeColorList, howOldList, exploreStartList,
 	chargerList, sleepList, morningList, nightList, timeList, byeList, newYearList, holidaysList,
-	helloList, signInAlexaList, signOutAlexaList, loveList, forwardList, turnAroundList, turnLeftList,
-	turnRightList, rollCubeList, wheelieList, fistbumpList, blackjackList, affirmativeList, negativeList,
-	nameAskList, photoList, praiseList, abuseList}
+	signInAlexaList, signOutAlexaList, loveList, forwardList, turnAroundList, turnLeftList,
+	turnRightList, rollCubeList, wheelieList, fistbumpList, blackjackList, affirmativeList,
+	negativeList, nameAskList, photoList, praiseList, abuseList, weatherList, apologizeList,
+	backupList, volumeDownList, quietList, volumeUpList, lookAtMeList, volumeSpecificList,
+	shutUpList, helloList, comeList}

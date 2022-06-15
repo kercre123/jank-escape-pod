@@ -129,7 +129,21 @@ Current Implemented Actions:
 - What's my name
 - Take a photo
 	- As well as "Take a photo of me"
+- Weather
+	- Placeholder values
+- Im sorry
+- Back up
+- Come here
+- Volume down
+- Be quiet
+- Volume up
+- Look at me
+- Set the volume to
+	- High, medium high, medium, medium low, low
+- Shut up
 
 ## Credits
 
 [Digital Dream Labs](https://github.com/digital-dream-labs) for saving Vector and for open sourcing chipper which made this possible
+[dietb](https://github.com/dietb) for rewriting chipper and giving tips
+[GitHub Copilot](https://copilot.github.com/) for being awesome
