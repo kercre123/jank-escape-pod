@@ -18,7 +18,6 @@ var holidaysList = []string{"he holds", "christmas", "behold", "holiday"}
 var signInAlexaList = []string{"in intellect", "fine in electa", "in alex", "ing alex", "in an elect", "to alex",
 	"in angelica"}
 var signOutAlexaList = []string{"in outlet", "i now of elea", "out alexa", "out of ale"}
-var loveList = []string{"love", "dove"}
 var forwardList = []string{"forward", "for ward", "for word"}
 var turnAroundList = []string{"around", "one eighty", "one ate he"}
 var turnLeftList = []string{"rn left", "go left", "e left", "ed left", "ernest"}
@@ -46,6 +45,7 @@ var volumeSpecificList = []string{"all you", "volume", "loudness"}
 var shutUpList = []string{"shut up"}
 var helloList = []string{"hello", "are you", "high", "below", "little", "follow"}
 var comeList = []string{"come", "to me"}
+var loveList = []string{"love", "dove"}
 
 // make sure intentsList perfectly matches up with matchListList
 
@@ -53,19 +53,18 @@ var intentsList = []string{"intent_imperative_eyecolor",
 	"intent_character_age", "intent_explore_start", "intent_system_charger", "intent_system_sleep",
 	"intent_greeting_goodmorning", "intent_greeting_goodnight", "intent_clock_time",
 	"intent_greeting_goodbye", "intent_seasonal_happynewyear", "intent_seasonal_happyholidays",
-	"intent_amazon_signin", "intent_amazon_signin", "intent_imperative_love",
-	"intent_imperative_forward", "intent_imperative_turnaround", "intent_imperative_turnleft",
-	"intent_imperative_turnright", "intent_play_rollcube", "intent_play_popawheelie", "intent_play_fistbump",
-	"intent_play_blackjack", "intent_imperative_affirmative", "intent_imperative_negative", "intent_names_ask",
+	"intent_amazon_signin", "intent_amazon_signin", "intent_imperative_forward", "intent_imperative_turnaround",
+	"intent_imperative_turnleft", "intent_imperative_turnright", "intent_play_rollcube", "intent_play_popawheelie",
+	"intent_play_fistbump", "intent_play_blackjack", "intent_imperative_affirmative", "intent_imperative_negative", "intent_names_ask",
 	"intent_photo_take_extend", "intent_imperative_praise", "intent_imperative_abuse", "intent_weather_extend",
 	"intent_imperative_apologize", "intent_imperative_backup", "intent_imperative_volumedown",
 	"intent_imperative_quiet", "intent_imperative_volumeup", "intent_imperative_lookatme", "intent_imperative_volumelevel_extend",
-	"intent_imperative_shutup", "intent_greeting_hello", "intent_imperative_come"}
+	"intent_imperative_shutup", "intent_greeting_hello", "intent_imperative_come", "intent_imperative_love"}
 
 var matchListList = [][]string{eyeColorList, howOldList, exploreStartList,
 	chargerList, sleepList, morningList, nightList, timeList, byeList, newYearList, holidaysList,
-	signInAlexaList, signOutAlexaList, loveList, forwardList, turnAroundList, turnLeftList,
+	signInAlexaList, signOutAlexaList, forwardList, turnAroundList, turnLeftList,
 	turnRightList, rollCubeList, wheelieList, fistbumpList, blackjackList, affirmativeList,
 	negativeList, nameAskList, photoList, praiseList, abuseList, weatherList, apologizeList,
 	backupList, volumeDownList, quietList, volumeUpList, lookAtMeList, volumeSpecificList,
-	shutUpList, helloList, comeList}
+	shutUpList, helloList, comeList, loveList}

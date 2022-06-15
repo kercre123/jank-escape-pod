@@ -18,6 +18,7 @@ var debugLogging = true
 
 var intent pb.IntentResponse
 var matched int = 0
+var successMatched int = 0
 var intentNum int = 0
 var botNum int = 0
 
@@ -143,7 +144,7 @@ func paramChecker(req *vtt.IntentRequest, intent string, speechText string) {
 	} else if strings.Contains(intent, "intent_imperative_volumelevel_extend") {
 		isParam = true
 		newIntent = intent
-		if strings.Contains(speechText, "medium low") || strings.Contains(speechText, "media low") || strings.Contains(speechText, "medium bow") || strings.Contains(speechText, "media bow") {
+		if strings.Contains(speechText, "medium lo") || strings.Contains(speechText, "media lo") || strings.Contains(speechText, "medium bo") || strings.Contains(speechText, "media bo") {
 			intentParam = "volume_level"
 			intentParamValue = "VOLUME_2"
 		} else if strings.Contains(speechText, "low") || strings.Contains(speechText, "quiet") {
@@ -205,15 +206,19 @@ func IntentPass(req *vtt.IntentRequest, intentThing string, speechText string, i
 
 func processTextAll(req *vtt.IntentRequest, voiceText string, listOfLists [][]string, intentList []string) {
 	intentNum = 0
+	matched = 0
+	successMatched = 0
 	for _, b := range listOfLists {
 		for _, c := range b {
 			if strings.Contains(voiceText, c) {
-				if matched == 0 {
-					paramChecker(req, intentList[intentNum], voiceText)
-				}
+				paramChecker(req, intentList[intentNum], voiceText)
+				successMatched = 1
 				matched = 1
-				break
 			}
+		}
+		if matched == 1 {
+			matched = 0
+			break
 		}
 		intentNum = intentNum + 1
 	}
@@ -309,13 +314,13 @@ func (s *Server) ProcessIntent(req *vtt.IntentRequest) (*vtt.IntentResponse, err
 	}
 
 	processTextAll(req, transcribedText, matchListList, intentsList)
-	botNum = botNum - 1
 
-	if matched == 0 {
+	if successMatched == 0 {
 		if debugLogging == true {
 			log.Println("No intent was matched.")
 		}
 		IntentPass(req, "intent_system_noaudio", transcribedText, map[string]string{"": ""}, false)
 	}
+	botNum = botNum - 1
 	return nil, nil
 }
