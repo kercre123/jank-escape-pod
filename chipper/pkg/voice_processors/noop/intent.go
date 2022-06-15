@@ -50,6 +50,8 @@ func paramChecker(req *vtt.IntentRequest, intent string, speechText string) {
 			intentParamValue = "COLOR_TEAL"
 		} else if strings.Contains(speechText, "green") {
 			intentParamValue = "COLOR_GREEN"
+		} else if strings.Contains(speechText, "orange") {
+			intentParamValue = "COLOR_ORANGE"
 		} else {
 			newIntent = intent
 			intentParamValue = ""
