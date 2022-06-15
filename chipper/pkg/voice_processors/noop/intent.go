@@ -32,6 +32,9 @@ var specificLocation bool
 var apiLocation string
 var speechLocation string
 
+var username string
+var nameSplitter string
+
 func check(e error) {
 	if e != nil {
 		panic(e)
@@ -168,6 +171,40 @@ func paramChecker(req *vtt.IntentRequest, intent string, speechText string) {
 			intentParamValue = "VOLUME_1"
 		}
 		intentParams = map[string]string{intentParam: intentParamValue}
+	} else if strings.Contains(intent, "intent_names_username_extend") {
+		isParam = true
+		newIntent = intent
+		if strings.Contains(speechText, "is") {
+			nameSplitter = "is"
+		} else if strings.Contains(speechText, "'s") {
+			nameSplitter = "'s"
+		} else if strings.Contains(speechText, "names") {
+			nameSplitter = "names"
+		}
+		if strings.Contains(speechText, "is") || strings.Contains(speechText, "'s") || strings.Contains(speechText, "names") {
+			splitPhrase := strings.SplitAfter(speechText, nameSplitter)
+			username = strings.TrimSpace(splitPhrase[1])
+			if len(splitPhrase) == 3 {
+				username = username + " " + strings.TrimSpace(splitPhrase[2])
+			} else if len(splitPhrase) == 4 {
+				username = username + " " + strings.TrimSpace(splitPhrase[2]) + " " + strings.TrimSpace(splitPhrase[3])
+			} else if len(splitPhrase) > 4 {
+				username = username + " " + strings.TrimSpace(splitPhrase[2]) + " " + strings.TrimSpace(splitPhrase[3])
+			}
+			if debugLogging == true {
+				log.Println("Name parsed from speech: " + "`" + username + "`")
+			}
+			intentParam = "username"
+			intentParamValue = username
+			intentParams = map[string]string{intentParam: intentParamValue}
+		} else {
+			if debugLogging == true {
+				log.Println("No name parsed from speech")
+				intentParam = "username"
+				intentParamValue = ""
+				intentParams = map[string]string{intentParam: intentParamValue}
+			}
+		}
 	} else {
 		newIntent = intent
 		intentParam = ""

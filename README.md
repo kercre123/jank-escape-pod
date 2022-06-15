@@ -102,7 +102,7 @@ Current Implemented Actions:
 - Good robot
 - Bad robot
 - Change your eye color
-- Change your eye color to
+- Change your eye color to <color>
 	- blue, purple, teal, green, yellow
 - How old are you
 - Start exploring ("deploring" works better)
@@ -129,8 +129,10 @@ Current Implemented Actions:
 - No (negative)
 - What's my name
 - Take a photo
-	- As well as "Take a photo of me"
-- Weather
+- Take a photo of me
+- What's the weather
+	- Placeholder values
+- What's the weather in <location>
 	- Placeholder values
 - Im sorry
 - Back up
@@ -139,9 +141,10 @@ Current Implemented Actions:
 - Be quiet
 - Volume up
 - Look at me
-- Set the volume to
+- Set the volume to <volume>
 	- High, medium high, medium, medium low, low
 - Shut up
+- My name is <name>
 
 ## Credits
 
