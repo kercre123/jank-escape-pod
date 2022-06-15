@@ -2,6 +2,8 @@ package noop
 
 // This is where you can add intents and more possible utterances for intents
 
+var meetVictorList = []string{"name is", "native is", "names", "name's"}
+var nameAskList = []string{"my name"}
 var eyeColorList = []string{"eye color", "colo", "i call her", "i foller", "icolor", "ecce", "erior", "ichor", "agricola",
 	"change", "oracular"}
 var howOldList = []string{"older", "how old", "old are you", "old or yo"}
@@ -13,7 +15,7 @@ var nightList = []string{"night", "might"}
 var timeList = []string{"time is it", "the time", "what time", "time of"}
 var byeList = []string{"good bye", "good by", "good buy", "goodbye"}
 var newYearList = []string{"fireworks", "new year", "happy new", "happy to", "have been", "i now you", "no year", "enee",
-	"i never", "knew her"}
+	"i never", "knew her", "hobhouse", "bennie"}
 var holidaysList = []string{"he holds", "christmas", "behold", "holiday"}
 var signInAlexaList = []string{"in intellect", "fine in electa", "in alex", "ing alex", "in an elect", "to alex",
 	"in angelica"}
@@ -31,10 +33,10 @@ var blackjackList = []string{"black", "cards", "game"}
 var affirmativeList = []string{"yes", "correct", "hit"}
 var negativeList = []string{"no", "dont", "stand"}
 var photoList = []string{"photo", "foto", "selby", "capture", "picture"}
-var praiseList = []string{"good", "awesome", "also", "as some", "of them", "battle", "t rob", "the ro", "amazing"}
+var praiseList = []string{"good", "awesome", "also", "as some", "of them", "battle", "t rob", "the ro", "amazing", "woodcourt"}
 var abuseList = []string{"bad", "that ro", "ad ro", "a root", "hate", "horrible"}
 var weatherList = []string{"weather", "whether", "the other"}
-var apologizeList = []string{"sorry", "apologize", "apologise"}
+var apologizeList = []string{"sorry", "apologize", "apologise", "the tory"}
 var backupList = []string{"back", "a way", "away"}
 var volumeDownList = []string{"all you down", "volume down", "down volume", "down the volume", "quieter"}
 var quietList = []string{"quiet", "stop"}
@@ -45,12 +47,11 @@ var shutUpList = []string{"shut up"}
 var helloList = []string{"hello", "are you", "high", "below", "little", "follow"}
 var comeList = []string{"come", "to me"}
 var loveList = []string{"love", "dove"}
-var meetVictorList = []string{"name is", "native is", "names", "name's"}
-var nameAskList = []string{"my name"}
+var questionList = []string{"question"}
 
 // make sure intentsList perfectly matches up with matchListList
 
-var intentsList = []string{"intent_imperative_eyecolor",
+var intentsList = []string{"intent_names_username_extend", "intent_names_ask", "intent_imperative_eyecolor",
 	"intent_character_age", "intent_explore_start", "intent_system_charger", "intent_system_sleep",
 	"intent_greeting_goodmorning", "intent_greeting_goodnight", "intent_clock_time",
 	"intent_greeting_goodbye", "intent_seasonal_happynewyear", "intent_seasonal_happyholidays",
@@ -61,12 +62,12 @@ var intentsList = []string{"intent_imperative_eyecolor",
 	"intent_imperative_apologize", "intent_imperative_backup", "intent_imperative_volumedown",
 	"intent_imperative_quiet", "intent_imperative_volumeup", "intent_imperative_lookatme", "intent_imperative_volumelevel_extend",
 	"intent_imperative_shutup", "intent_greeting_hello", "intent_imperative_come", "intent_imperative_love",
-	"intent_names_username_extend", "intent_names_ask"}
+	"intent_knowledge_promptquestion"}
 
-var matchListList = [][]string{eyeColorList, howOldList, exploreStartList,
+var matchListList = [][]string{meetVictorList, nameAskList, eyeColorList, howOldList, exploreStartList,
 	chargerList, sleepList, morningList, nightList, timeList, byeList, newYearList, holidaysList,
 	signInAlexaList, signOutAlexaList, forwardList, turnAroundList, turnLeftList,
 	turnRightList, rollCubeList, wheelieList, fistbumpList, blackjackList, affirmativeList,
 	negativeList, photoList, praiseList, abuseList, weatherList, apologizeList,
 	backupList, volumeDownList, quietList, volumeUpList, lookAtMeList, volumeSpecificList,
-	shutUpList, helloList, comeList, loveList, meetVictorList, nameAskList}
+	shutUpList, helloList, comeList, loveList, questionList}

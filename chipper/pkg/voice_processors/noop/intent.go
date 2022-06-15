@@ -64,12 +64,12 @@ func getWeather(location string) (string, string, string, string, string, string
 		temperature_unit = "F" or "C"
 	*/
 	// placeholder values
-	condition := "Windy"
+	condition := "Snow"
 	is_forecast := "false"
 	local_datetime := "test"              // preferably local time in UTC ISO 8601 format ("2022-06-15 12:21:22.123")
 	speakable_location_string := location // preferably the processed location
-	temperature := "73"
-	temperature_unit := "F"
+	temperature := "120"
+	temperature_unit := "C"
 	return condition, is_forecast, local_datetime, speakable_location_string, temperature, temperature_unit
 }
 

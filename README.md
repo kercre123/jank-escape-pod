@@ -145,6 +145,8 @@ Current Implemented Actions:
 	- High, medium high, medium, medium low, low
 - Shut up
 - My name is <name>
+- I have a question
+	- Placeholder text
 
 ## Credits
 
