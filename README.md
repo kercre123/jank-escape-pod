@@ -88,7 +88,7 @@ General Notes:
 	- If you are running AMD64 and you feel like your system is too slow for regular STT processing, `touch ./chipper/slowsys'
 - If you get this error when running chipper, you are using a port that is being taken up by a program already: `panic: runtime error: invalid memory address or nil pointer dereference`
 	- Run `./setup.sh` with the 5th option to change the port, you will need to push files to the bot again.
-- If you want to disable logging from the voice processor, recompile chipper with `debugLogging` in ./voice_processors/noop/intent.go set to false.
+- If you want to disable logging from the voice processor, recompile chipper with `debugLogging` in ./chipper/pkg/voice_processors/noop/intent.go set to `false`.
 
 Known Issues:
 
