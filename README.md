@@ -67,7 +67,7 @@ Architecture Support:
 - arm64/aarch64
 - arm32/armv7l
 
-Things I've Gotten It Working On:
+Things It Has Worked On:
 
 - Raspberry Pi 4B+ 4GB RAM with Raspberry Pi OS
 	- Very fast, recommended platform
@@ -75,9 +75,11 @@ Things I've Gotten It Working On:
 - Raspberry Pi 4B+ 4GB RAM with Manjaro 22.04
 - Nintendo Switch with L4T Ubuntu
 - Desktop with Ryzen 5 3600, 16 GB RAM with Ubuntu 22.04
-- Laptop with mobile i7 with Linux Mint 20.3
-- Pixel 4 with Andronix
-	- Ubuntu 20.04 CLi Only, run `apt update` then `apt install git sudo` before and make sure to not use the default port 443. Port 6001 worked for me.
+- Laptop with mobile i7
+- Android Devices
+	- Pixel 4, Note 4, Razer Phone, Oculus Quest 2, OnePlus 7 Pro, Moto G6, Pixel 2
+	- [Termux](https://github.com/termux/termux-app) proot-distro: Use Ubuntu, make sure to use a port above 1024 and not the default 443.
+	- Linux Deploy: Works stock, just make sure to choose the arch that matches your device in settings.
 
 General Notes:
 
@@ -99,6 +101,8 @@ Current Implemented Actions:
 - Good robot
 - Bad robot
 - Change your eye color
+	- As well as "Change your eye color to"
+	- blue, purple, teal, green, yellow
 - How old are you
 - Start exploring ("deploring" works better)
 - Go home (or "go to your charger")
@@ -123,6 +127,8 @@ Current Implemented Actions:
 - Yes (affirmative)
 - No (negative)
 - What's my name
+- Take a photo
+	- As well as "Take a photo of me"
 
 ## Credits
 
