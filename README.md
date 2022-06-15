@@ -102,7 +102,7 @@ Current Implemented Actions:
 - Good robot
 - Bad robot
 - Change your eye color
-	- As well as "Change your eye color to"
+- Change your eye color to
 	- blue, purple, teal, green, yellow
 - How old are you
 - Start exploring ("deploring" works better)
