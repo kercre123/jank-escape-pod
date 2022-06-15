@@ -214,6 +214,7 @@ func processTextAll(req *vtt.IntentRequest, voiceText string, listOfLists [][]st
 				paramChecker(req, intentList[intentNum], voiceText)
 				successMatched = 1
 				matched = 1
+				break
 			}
 		}
 		if matched == 1 {
