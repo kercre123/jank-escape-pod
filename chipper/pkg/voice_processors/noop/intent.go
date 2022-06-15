@@ -23,12 +23,53 @@ var intent pb.IntentResponse
 var matched int = 0
 var intentNum int = 0
 var botNum int = 0
+var intentParam string
+var intentParamValue string
+var newIntent string
 
-func IntentPass(req *vtt.IntentRequest, intentThing string) (*vtt.IntentResponse, error) {
+func paramChecker(req *vtt.IntentRequest, intent string, speechText string) {
+	if strings.Contains(intent, "intent_photo_take_extend") {
+		newIntent = intent
+		if strings.Contains(speechText, "me") || strings.Contains(speechText, "self") {
+			intentParam = "entity_photo_selfie"
+			intentParamValue = "photo_selfie"
+		} else {
+			intentParam = "entity_photo_selfie"
+			intentParamValue = ""
+		}
+	} else if strings.Contains(intent, "intent_imperative_eyecolor") {
+		newIntent = "intent_imperative_eyecolor_specific_extend"
+		intentParam = "eye_color"
+		if strings.Contains(speechText, "purple") {
+			intentParamValue = "COLOR_PURPLE"
+		} else if strings.Contains(speechText, "blue") {
+			intentParamValue = "COLOR_BLUE"
+		} else if strings.Contains(speechText, "yellow") {
+			intentParamValue = "COLOR_YELLOW"
+		} else if strings.Contains(speechText, "teal") || strings.Contains(speechText, "tell") {
+			intentParamValue = "COLOR_TEAL"
+		} else if strings.Contains(speechText, "green") {
+			intentParamValue = "COLOR_GREEN"
+		} else {
+			newIntent = intent
+			intentParamValue = ""
+		}
+	} else {
+		newIntent = intent
+		intentParam = ""
+		intentParamValue = ""
+	}
+	IntentPass(req, newIntent, speechText, intentParam, intentParamValue)
+}
+
+func IntentPass(req *vtt.IntentRequest, intentThing string, speechText string, intentParam string, intentParamValue string) (*vtt.IntentResponse, error) {
 	intent = pb.IntentResponse{
 		IsFinal: true,
 		IntentResult: &pb.IntentResult{
-			Action: intentThing,
+			QueryText: speechText,
+			Action:    intentThing,
+			// TODO: make paramChecker define the whole map[string], so weather can work
+			Parameters: map[string]string{intentParam: intentParamValue},
 		},
 	}
 	if err := req.Stream.Send(&intent); err != nil {
@@ -38,6 +79,7 @@ func IntentPass(req *vtt.IntentRequest, intentThing string) (*vtt.IntentResponse
 		Intent: &intent,
 	}
 	log.Println("Intent Sent: " + intentThing)
+	log.Println("Parameters Sent: " + intentParam + " : " + intentParamValue)
 	return r, nil
 }
 
@@ -47,7 +89,7 @@ func processTextAll(req *vtt.IntentRequest, voiceText string, listOfLists [][]st
 		for _, c := range b {
 			if strings.Contains(voiceText, c) {
 				matched = 1
-				IntentPass(req, intentList[intentNum])
+				paramChecker(req, intentList[intentNum], voiceText)
 				break
 			}
 		}
@@ -64,9 +106,7 @@ func (s *Server) ProcessIntent(req *vtt.IntentRequest) (*vtt.IntentResponse, err
 	var transcribedText string
 	matched = 0
 	botNum = botNum + 1
-	log.Println(botNum)
-	log.Println(strconv.Itoa(botNum))
-	log.Println(strconv.Itoa(botNum))
+	log.Println("Stream " + strconv.Itoa(botNum) + " opened.")
 	f, err := os.Create("/tmp/" + strconv.Itoa(botNum) + "voice.ogg")
 	check(err)
 	cmd1 := exec.Command("/bin/bash", "../stt.sh", strconv.Itoa(botNum))
@@ -78,7 +118,7 @@ func (s *Server) ProcessIntent(req *vtt.IntentRequest) (*vtt.IntentResponse, err
 		chunk, err := req.Stream.Recv()
 		if err != nil {
 			if err == io.EOF {
-				IntentPass(req, "intent_system_noaudio")
+				IntentPass(req, "intent_system_noaudio", "EOF error", "", "")
 				break
 			}
 
@@ -135,7 +175,7 @@ func (s *Server) ProcessIntent(req *vtt.IntentRequest) (*vtt.IntentResponse, err
 
 	if matched == 0 {
 		log.Println("No intent was matched.")
-		IntentPass(req, "intent_system_noaudio")
+		IntentPass(req, "intent_system_noaudio", transcribedText, "", "")
 	}
 	return nil, nil
 }
