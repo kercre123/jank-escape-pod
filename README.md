@@ -89,6 +89,7 @@ General Notes:
 - If you get this error when running chipper, you are using a port that is being taken up by a program already: `panic: runtime error: invalid memory address or nil pointer dereference`
 	- Run `./setup.sh` with the 5th and 6th option to change the port, you will need to push files to the bot again.
 - If you want to disable logging from the voice processor, recompile chipper with `debugLogging` in ./chipper/pkg/voice_processors/noop/intent.go set to `false`.
+- Some weather conditions don't match the bot's internal response map, so sometimes Vector won't be able to give you the weather until I make my own response map.
 
 Known Issues:
 
@@ -150,6 +151,11 @@ Current Implemented Actions:
 - Set a timer for <time> minutes
 - Check the timer
 - Stop the timer
+- Dance
+- Pick up the cube
+- Fetch the cube
+- Find the cube
+- Do a trick
 
 ## Credits
 

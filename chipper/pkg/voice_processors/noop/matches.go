@@ -5,10 +5,10 @@ package noop
 var meetVictorList = []string{"name is", "native is", "names", "name's"}
 var nameAskList = []string{"my name"}
 var eyeColorList = []string{"eye color", "colo", "i call her", "i foller", "icolor", "ecce", "erior", "ichor", "agricola",
-	"change", "oracular"}
+	"change", "oracular", "oracle"}
 var howOldList = []string{"older", "how old", "old are you", "old or yo"}
 var exploreStartList = []string{"start", "plor", "owing", "tailoring", "oding", "oring", "pling"}
-var chargerList = []string{"charge", "home", "go to your", "church"}
+var chargerList = []string{"charge", "home", "go to your", "church", "find your ch"}
 var sleepList = []string{"flee", "sleep", "sheep"}
 var morningList = []string{"morning", "mourning", "mooning", "it bore"}
 var nightList = []string{"night", "might"}
@@ -52,6 +52,11 @@ var stopTimerList = []string{"stop timer", "stop clock", "stop be", "stopped t",
 var timerList = []string{"timer", "time for", "time of for"}
 var timeList = []string{"time is it", "the time", "what time", "time of", "clock"}
 var quietList = []string{"quiet", "stop"}
+var danceList = []string{"dance", "dancing", "thence"}
+var pickUpList = []string{"pickup", "pick up", "bring to me", "bring me", "the beat", "boogie"}
+var fetchCubeList = []string{"fetch your cu", "fetch cu", "fetch the cu"}
+var findCubeList = []string{"your cu", "the cu"}
+var trickList = []string{"trick", "something cool", "some thing cool"}
 
 // make sure intentsList perfectly matches up with matchListList
 
@@ -66,7 +71,8 @@ var intentsList = []string{"intent_names_username_extend", "intent_names_ask", "
 	"intent_imperative_volumeup", "intent_imperative_lookatme", "intent_imperative_volumelevel_extend",
 	"intent_imperative_shutup", "intent_greeting_hello", "intent_imperative_come", "intent_imperative_love",
 	"intent_knowledge_promptquestion", "intent_clock_checktimer", "intent_global_stop_extend", "intent_clock_settimer_extend",
-	"intent_clock_time", "intent_imperative_quiet"}
+	"intent_clock_time", "intent_imperative_quiet", "intent_imperative_dance", "intent_play_pickupcube",
+	"intent_imperative_fetchcube", "intent_imperative_findcube", "intent_play_anytrick"}
 
 var matchListList = [][]string{meetVictorList, nameAskList, eyeColorList, howOldList, exploreStartList,
 	chargerList, sleepList, morningList, nightList, byeList,
@@ -75,4 +81,4 @@ var matchListList = [][]string{meetVictorList, nameAskList, eyeColorList, howOld
 	negativeList, photoList, praiseList, abuseList, weatherList, apologizeList,
 	backupList, volumeDownList, volumeUpList, lookAtMeList, volumeSpecificList,
 	shutUpList, helloList, comeList, loveList, questionList, checkTimerList, stopTimerList,
-	timerList, timeList, quietList}
+	timerList, timeList, quietList, danceList, pickUpList, fetchCubeList, findCubeList, trickList}
