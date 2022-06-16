@@ -47,7 +47,7 @@ var comeList = []string{"come", "to me"}
 var loveList = []string{"love", "dove"}
 var questionList = []string{"question"}
 var checkTimerList = []string{"check timer", "check the timer", "check the time her", "check time her",
-	"check time her", "check time of her"}
+	"check time her", "check time of her", "checked the timer", "checked the time her", "checked the time of her"}
 var stopTimerList = []string{"stop timer", "stop clock", "stop be", "stopped t", "stopped be", "stopped at", "stop the"}
 var timerList = []string{"timer", "time for", "time of for", "time or"}
 var timeList = []string{"time is it", "the time", "what time", "time of", "clock"}
