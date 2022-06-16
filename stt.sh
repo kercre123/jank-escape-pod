@@ -21,9 +21,9 @@ ffmpeg -y -i /tmp/${botNum}voice${fileSuffix}.ogg /tmp/${botNum}voice${fileSuffi
 }
 
 function doSttSlow() {
-sleep 2
+sleep 1.5
 cd ../
-rm -rf /tmp/${botNum}voice.wav${fileSuffix}
+rm -rf /tmp/${botNum}voice${fileSuffix}.wav
 ffmpegCmd
 sstCmd > /tmp/${botNum}utterance1${fileSuffix}
 touch /tmp/${botNum}sttDone${fileSuffix}
