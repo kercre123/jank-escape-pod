@@ -241,10 +241,65 @@ function makeSource() {
       echo
       echo "Something may be using port ${port}. Make sure that port is free before you start chipper."
    fi
+   echo
+   function weatherPrompt() {
+   echo "Would you like to setup weather commands? This involves creating a free account at https://www.weatherapi.com/ and putting in your API key."
+   echo "Otherwise, placeholder values will be used."
+   echo
+   echo "1: Yes"
+   echo "2: No"
+   read -p "Enter a number (1): " yn
+   case $yn in
+      "1" ) weatherSetup="true";;
+      "2" ) weatherSetup="false";;
+      "" ) weatherSetup="true";;
+      * ) echo "Please answer with 1 or 2."; weatherPrompt;;
+   esac
+   }
+   weatherPrompt
+   if [[ ${weatherSetup} == "true" ]]; then
+   function weatherKeyPrompt() {
+      echo
+      echo "Create an account at https://www.weatherapi.com/ and enter the API key it gives you."
+      echo "If you have changed your mind, enter Q to continue without weather commands."
+      echo
+      read -p "Enter your API key: " weatherAPI
+      if [[ ! -n ${weatherAPI} ]]; then
+         echo "You must enter an API key. If you have changed your mind, you may also enter Q to continue without weather commands."
+         weatherKeyPrompt
+      fi
+      if [[ ${weatherAPI} == "Q" ]]; then
+         weatherSetup="false";
+      fi
+   }
+   weatherKeyPrompt
+   function weatherUnitPrompt() {
+   echo "What temperature unit would you like to use?"
+   echo
+   echo "1: Fahrenheit"
+   echo "2: Celsius"
+   read -p "Enter a number (1): " yn
+   case $yn in
+      "1" ) weatherUnit="F";;
+      "2" ) weatherUnit="C";;
+      "" ) weatherUnit="F";;
+      * ) echo "Please answer with 1 or 2."; weatherUnitPrompt;;
+   esac
+   }
+   weatherUnitPrompt
+   fi
    echo "export DDL_RPC_PORT=${port}" > source.sh
    echo 'export DDL_RPC_TLS_CERTIFICATE=$(cat ../certs/cert.crt)' >> source.sh
    echo 'export DDL_RPC_TLS_KEY=$(cat ../certs/cert.key)' >> source.sh
-   echo "DDL_RPC_CLIENT_AUTHENTICATION=NoClientCert" >> source.sh
+   echo "export DDL_RPC_CLIENT_AUTHENTICATION=NoClientCert" >> source.sh
+   if [[ ${weatherSetup} == "true" ]]; then
+      echo "export WEATHERAPI_ENABLED=true" >> source.sh
+      echo "export WEATHERAPI_KEY=${weatherAPI}" >> source.sh
+      echo "export WEATHERAPI_UNIT=${weatherUnit}" >> source.sh
+   else 
+      echo "export WEATHERAPI_ENABLED=false" >> source.sh
+   fi
+   echo "export DEBUG_LOGGING=true" >> source.sh
    cd ..
    echo
    echo "Created source.sh file!"
@@ -328,9 +383,10 @@ function firstPrompt() {
       "2" ) echo; getPackages; buildCloud;;
       "3" ) echo; getPackages; buildChipper;;
       "4" ) echo; rm -f ./stt/completed; getSTT;;
-      "5" ) echo; getPackages; generateCerts; makeSource;;
+      "5" ) echo; getPackages; generateCerts;;
+      "6" ) echo; makeSource;;
       "" ) echo; getPackages; getSTT; generateCerts; buildChipper; makeSource; echo "Everything is done! To copy everything needed to your bot, run this script like this:"; echo "Usage: sudo ./setup.sh scp <vector's ip> <path/to/ssh-key>"; echo "Example: sudo ./setup.sh scp 192.168.1.150 /home/wire/id_rsa_Vector-R2D2"; echo; echo "If your Vector is on Wire's custom software or you have an old dev build, you can run this command without an SSH key:"; echo "Example: sudo ./setup.sh scp 192.168.1.150"; echo ;;
-      * ) echo "Please answer with 1, 2, 3, 4, 5, or just press enter with no input for 1."; firstPrompt;;
+      * ) echo "Please answer with 1, 2, 3, 4, 5, 6, or just press enter with no input for 1."; firstPrompt;;
    esac
 }
 
@@ -346,7 +402,8 @@ echo "1: Full Setup (recommended) (builds chipper, gets STT stuff, generates cer
 echo "2: Just build vic-cloud"
 echo "3: Just build chipper"
 echo "4: Just get STT stuff"
-echo "5: Just generate certs and create source.sh file"
+echo "5: Just generate certs"
+echo "6: Just create source.sh file and config for bot (also for setting up weather API)"
 echo "If you have done everything you have needed, run './setup.sh scp vectorip path/to/key' to copy the new vic-cloud and server config to Vector."
 echo
 firstPrompt

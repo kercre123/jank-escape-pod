@@ -1,9 +1,12 @@
 package noop
 
 import (
+	"encoding/json"
 	"io"
 	"io/ioutil"
 	"log"
+	"net/http"
+	"net/url"
 	"os"
 	"os/exec"
 	"strconv"
@@ -13,8 +16,10 @@ import (
 	"github.com/digital-dream-labs/chipper/pkg/vtt"
 )
 
-// set to false for no logging
-var debugLogging = true
+var debugLogging bool
+
+var weatherEnabled bool
+var weatherAPIKey string
 
 var intent pb.IntentResponse
 var matched int = 0
@@ -31,6 +36,12 @@ var intentParams map[string]string
 var specificLocation bool
 var apiLocation string
 var speechLocation string
+var condition string
+var is_forecast string
+var local_datetime string
+var speakable_location_string string
+var temperature string
+var temperature_unit string
 
 var username string
 var nameSplitter string
@@ -63,13 +74,85 @@ func getWeather(location string) (string, string, string, string, string, string
 		temperature = "83", degrees
 		temperature_unit = "F" or "C"
 	*/
-	// placeholder values
-	condition := "Snow"
-	is_forecast := "false"
-	local_datetime := "test"              // preferably local time in UTC ISO 8601 format ("2022-06-15 12:21:22.123")
-	speakable_location_string := location // preferably the processed location
-	temperature := "120"
-	temperature_unit := "C"
+	weatherAPIEnabled := os.Getenv("WEATHERAPI_ENABLED")
+	weatherAPIKey := os.Getenv("WEATHERAPI_KEY")
+	weatherAPIUnit := os.Getenv("WEATHERAPI_UNIT")
+	if weatherAPIEnabled == "true" && weatherAPIKey != "" {
+		weatherEnabled = true
+		if debugLogging == true {
+			log.Println("Weather API Enabled")
+		}
+	} else {
+		weatherEnabled = false
+		if debugLogging == true {
+			log.Println("Weather API not enabled, using placeholder")
+			if weatherAPIEnabled == "true" && weatherAPIKey == "" {
+				log.Println("Weather API enabled, but Weather API key not set")
+			}
+		}
+	}
+	if weatherEnabled == true {
+		if weatherAPIUnit != "F" && weatherAPIUnit != "C" {
+			if debugLogging == true {
+				log.Println("Weather API unit not set, using F")
+			}
+			weatherAPIUnit = "F"
+		}
+	}
+	if weatherEnabled == true {
+		params := url.Values{}
+		params.Add("key", weatherAPIKey)
+		params.Add("q", location)
+		params.Add("aqi", "no")
+		url := "http://api.weatherapi.com/v1/current.json"
+		resp, err := http.PostForm(url, params)
+		if err != nil {
+			panic(err)
+		}
+		defer resp.Body.Close()
+		body, _ := ioutil.ReadAll(resp.Body)
+		weatherResponse := string(body)
+		if debugLogging == true {
+			log.Println(weatherResponse)
+		}
+		type weatherAPIResponseStruct struct {
+			Location struct {
+				Name      string `json:"name"`
+				Localtime string `json:"localtime"`
+			} `json:"location"`
+			Current struct {
+				LastUpdatedEpoch int     `json:"last_updated_epoch"`
+				LastUpdated      string  `json:"last_updated"`
+				TempC            float64 `json:"temp_c"`
+				TempF            float64 `json:"temp_f"`
+				Condition        struct {
+					Text string `json:"text"`
+					Icon string `json:"icon"`
+					Code int    `json:"code"`
+				} `json:"condition"`
+			} `json:"current"`
+		}
+		var weatherStruct weatherAPIResponseStruct
+		json.Unmarshal([]byte(weatherResponse), &weatherStruct)
+		condition = weatherStruct.Current.Condition.Text
+		is_forecast = "false"
+		local_datetime = weatherStruct.Current.LastUpdated
+		speakable_location_string = weatherStruct.Location.Name
+		if weatherAPIUnit == "C" {
+			temperature = strconv.Itoa(int(weatherStruct.Current.TempC))
+			temperature_unit = "C"
+		} else {
+			temperature = strconv.Itoa(int(weatherStruct.Current.TempF))
+			temperature_unit = "F"
+		}
+	} else {
+		condition = "Snow"
+		is_forecast = "false"
+		local_datetime = "test"              // preferably local time in UTC ISO 8601 format ("2022-06-15 12:21:22.123")
+		speakable_location_string = location // preferably the processed location
+		temperature = "120"
+		temperature_unit = "C"
+	}
 	return condition, is_forecast, local_datetime, speakable_location_string, temperature, temperature_unit
 }
 
@@ -264,6 +347,16 @@ func processTextAll(req *vtt.IntentRequest, voiceText string, listOfLists [][]st
 }
 
 func (s *Server) ProcessIntent(req *vtt.IntentRequest) (*vtt.IntentResponse, error) {
+	if os.Getenv("DEBUG_LOGGING") != "true" && os.Getenv("DEBUG_LOGGING") != "false" {
+		log.Println("No valid value for DEBUG_LOGGING, setting to true")
+		debugLogging = true
+	} else {
+		if os.Getenv("DEBUG_LOGGING") == "true" {
+			debugLogging = true
+		} else {
+			debugLogging = false
+		}
+	}
 	var finished1 string
 	var finished2 string
 	var finished3 string

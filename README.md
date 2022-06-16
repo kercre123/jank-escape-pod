@@ -87,13 +87,14 @@ General Notes:
 	- If you are running ARM and you feel like your system is fast enough for regular STT processing, 'sudo rm -f ./chipper/slowsys'
 	- If you are running AMD64 and you feel like your system is too slow for regular STT processing, `touch ./chipper/slowsys'
 - If you get this error when running chipper, you are using a port that is being taken up by a program already: `panic: runtime error: invalid memory address or nil pointer dereference`
-	- Run `./setup.sh` with the 5th option to change the port, you will need to push files to the bot again.
+	- Run `./setup.sh` with the 5th and 6th option to change the port, you will need to push files to the bot again.
 - If you want to disable logging from the voice processor, recompile chipper with `debugLogging` in ./chipper/pkg/voice_processors/noop/intent.go set to `false`.
 
 Known Issues:
 
 - ARM processing is slow until I find a good way to deal with the end of speech on (comparatively) slow hardware.
 - Implemented Actions list is not complete yet.
+	- Still need to implement timers
 - The audio stream is a little cut off at the beginning.
 	- This may be an issue with vector-cloud/chipper itself, it seems to happen in normal operation with the prod servers too.
 
@@ -131,9 +132,9 @@ Current Implemented Actions:
 - Take a photo
 - Take a photo of me
 - What's the weather
-	- Placeholder values
+	- Requires API setup
 - What's the weather in <location>
-	- Placeholder values
+	- Requires API setup
 - Im sorry
 - Back up
 - Come here

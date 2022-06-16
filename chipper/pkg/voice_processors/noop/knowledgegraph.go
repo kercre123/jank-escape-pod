@@ -13,7 +13,7 @@ import (
 	"github.com/digital-dream-labs/chipper/pkg/vtt"
 )
 
-var debugLoggingKG bool = true
+var debugLoggingKG bool
 
 var NoResult string = "NoResultCommand"
 var NoResultSpoken string
@@ -23,6 +23,16 @@ var matchedKG int = 0
 
 // ProcessKnowledgeGraph handles knowledge graph interactions
 func (s *Server) ProcessKnowledgeGraph(req *vtt.KnowledgeGraphRequest) (*vtt.KnowledgeGraphResponse, error) {
+	if os.Getenv("DEBUG_LOGGING") != "true" && os.Getenv("DEBUG_LOGGING") != "false" {
+		log.Println("No valid value for DEBUG_LOGGING, setting to true")
+		debugLoggingKG = true
+	} else {
+		if os.Getenv("DEBUG_LOGGING") == "true" {
+			debugLoggingKG = true
+		} else {
+			debugLoggingKG = false
+		}
+	}
 	var finished1 string
 	var finished2 string
 	var finished3 string
