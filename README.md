@@ -93,8 +93,6 @@ General Notes:
 Known Issues:
 
 - ARM processing is slow until I find a good way to deal with the end of speech on (comparatively) slow hardware.
-- Implemented Actions list is not complete yet.
-	- Still need to implement timers
 - The audio stream is a little cut off at the beginning.
 	- This may be an issue with vector-cloud/chipper itself, it seems to happen in normal operation with the prod servers too.
 
@@ -148,6 +146,10 @@ Current Implemented Actions:
 - My name is <name>
 - I have a question
 	- Placeholder text
+- Set a timer for <time> seconds
+- Set a timer for <time> minutes
+- Check the timer
+- Stop the timer
 
 ## Credits
 

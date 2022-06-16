@@ -288,6 +288,22 @@ func paramChecker(req *vtt.IntentRequest, intent string, speechText string) {
 				intentParams = map[string]string{intentParam: intentParamValue}
 			}
 		}
+	} else if strings.Contains(intent, "intent_clock_settimer_extend") {
+		isParam = true
+		newIntent = intent
+		timerSecs := words2num(speechText)
+		if debugLogging == true {
+			log.Println("Seconds parsed from speech: " + timerSecs)
+		}
+		intentParam = "timer_duration"
+		intentParamValue = timerSecs
+		intentParams = map[string]string{intentParam: intentParamValue}
+	} else if strings.Contains(intent, "intent_global_stop_extend") {
+		isParam = true
+		newIntent = intent
+		intentParam = "what_to_stop"
+		intentParamValue = "timer"
+		intentParams = map[string]string{intentParam: intentParamValue}
 	} else {
 		newIntent = intent
 		intentParam = ""
